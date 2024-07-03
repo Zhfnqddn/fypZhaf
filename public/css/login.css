@@ -298,3 +298,14 @@ header.sticky{
     background-color: #dff0d8;
     border-color: #d6e9c6;
 }
+
+.font h1{
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    background-color: var(--other-color);
+    width: 340px;
+    border-radius: 20px;
+    box-shadow: black 0px 1px 15px;
+    margin-bottom: 20px;
+}

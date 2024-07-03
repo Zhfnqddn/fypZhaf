@@ -272,7 +272,7 @@ span{
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -318,7 +318,7 @@ h3{
     margin-top: 1px;
     font-size: var(--p-font);
     background: var(--other-color);
-    font-weight: 500;
+    font-weight: bold;
     letter-spacing: 1px;
     border-radius: 3rem;
     box-shadow: #B026FF 0px 1px 10px;

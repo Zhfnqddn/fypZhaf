@@ -38,7 +38,9 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <div class="container-box">
             <form action="{{ route('login') }}" method="post">
                 @csrf
+                <div class="font">
                 <h1>LOGIN</h1>
+                </div>
 
                 <!-- Display Validation Errors -->
                 @if ($errors->any())

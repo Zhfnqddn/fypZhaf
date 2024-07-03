@@ -22,27 +22,30 @@
 
 
     <section class="container">
-        <div class="container-box">
-            <form action="{{ route('register') }}" method="POST">
-                @csrf
+    <div class="container-box">
+        <form action="{{ route('register') }}" method="POST">
+            @csrf
+            <div class="font">
                 <h1>REGISTER</h1>
+            </div>
 
-                <!-- Display Validation Errors -->
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            <!-- Display Validation Errors -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                <!-- Display Success Message -->
-                @if (session('status'))
-                    <div id="success-message" data-message="{{ session('status') }}"></div>
-                @endif
+            <!-- Display Success Message -->
+            @if (session('status'))
+                <div id="success-message" data-message="{{ session('status') }}"></div>
+            @endif
 
+            <div class="input-group">
                 <div class="input-box">
                     <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" required autofocus autocomplete="name">
                     <i class='bx bxs-user'></i>
@@ -51,6 +54,9 @@
                     <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus autocomplete="email">
                     <i class='bx bxs-envelope'></i>
                 </div>
+            </div>
+
+            <div class="input-group">
                 <div class="input-box">
                     <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
                     <i class='bx bxs-lock'></i>
@@ -59,6 +65,9 @@
                     <input type="password" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                     <i class='bx bxs-lock'></i>
                 </div>
+            </div>
+
+            <div class="input-group">
                 <div class="input-box">
                     <input type="tel" name="phone" placeholder="Phone Number" value="{{ old('phone') }}">
                     <i class='bx bxs-phone'></i>
@@ -71,13 +80,15 @@
                         <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>Customer</option>
                     </select>
                 </div>
-                <button type="submit" class="btn">Register</button>
-                <div class="register-link">
-                    <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
-                </div>
-            </form>
-        </div>
-    </section>
+            </div>
+            
+            <button type="submit" class="btn">Register</button>
+            <div class="register-link">
+                <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
+            </div>
+        </form>
+    </div>
+</section>
 
     <section class="contact" id="contact">
         <div class="contact-text">
