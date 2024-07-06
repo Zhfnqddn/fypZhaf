@@ -19,6 +19,7 @@ class CreateBookingsTable extends Migration
             $table->date('end_Date');
             $table->time('time_from');
             $table->time('time_to');
+            $table->string('location');
             $table->decimal('total_price', 8, 2);
             $table->string('booking_status');
             $table->unsignedBigInteger('cust_ID');

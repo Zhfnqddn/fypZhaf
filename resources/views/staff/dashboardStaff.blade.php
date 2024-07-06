@@ -26,7 +26,7 @@
 
     <!---header--->
     <header>
-	<a href="{{ (route('dashboardStaff')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SHUTTER SEARCH & BOOKING</a> 
+	<a href="{{ (route('dashboardStaff')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
     <h3>STAFF</h3>
 	
 	<ul class="navlist">
@@ -53,7 +53,7 @@
 	<div class="dropdown">
     <a href="#" class="hi">Hi {{ $user->name }} <i class="bx bx-chevron-down"></i></a>
     <div class="dropdown-content">
-		<a href="#">View Profile</a>
+		<a href="{{ route('viewStaff') }}">View Profile</a>
 		<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 			<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     		@csrf

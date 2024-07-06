@@ -19,6 +19,11 @@ class PackageDetail extends Model
         'package_ID'
     ];
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'cust_ID');
+    }
+
     public function package()
     {
         return $this->belongsTo(Package::class, 'package_ID');

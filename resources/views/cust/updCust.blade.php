@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>View Profile</title>
+    <link rel="stylesheet" href="{{ asset('css/updAcc.css') }}?v={{ time() }}">
 
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}?v={{ time() }}">
-
-
-    <!---box icons--->	
+<!---box icons--->	
 <link rel="stylesheet"
 href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" 
@@ -21,77 +18,80 @@ rel="stylesheet">
 family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
-</head>
-<body>
-
     <!---header--->
     <header>
-	<a href="{{ (route('home')) }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
+	<a href="{{ (route('dashboard')) }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
 	
 	<ul class="navlist">
-		<li><a href="{{ (route('home')) }}" class="active">HOME</a></li>
+		<li><a href="{{ (route('dashboard')) }}" class="active">HOME</a></li>
 			<div class="dropdown">
-				<a href="{{ (route('login')) }}" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
+				<a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
 					<a href="#">EVENTS</a>
 					<a href="#">VIEW BOOKING</a>
 				</div>
 			</div>
 			<div class="dropdown">
-				<a href="{{ (route('login')) }}" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
+				<a href="#" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
 					<a href="#">STATUS</a>
 				</div>
 			</div>
 	</ul>
+
 	
 	<div class="nav">
-		<a href="{{ (route('login')) }}">LOGIN</a>
-		<a href="{{ (route('register')) }}">REGISTER</a>
+	<div class="dropdown">
+	<a href="#" class="hi">Hi {{ Auth::user()->name }} <i class="bx bx-chevron-down"></i></a>
+    <div class="dropdown-content">
+	<a href="{{ route('viewCust') }}">View Profile</a>
+	<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+			<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    		@csrf
+			</form>
+		</div>
+	</div>
+		
 		<div class="bx bx-menu" id="menu-icon"></div>
 	</div>	
     </header>
 
-	<!--HOME-->
+<body>
 
-	<section class="home" id="home">
-		<div class="home-text">
-			<h1>“WHEN I HAVE A <span>CAMERA</span> IN MY HAND, I KNOW<br> <span>NO FEAR</span>"</h1>
-			<a href="about.html" class="btn">BOOK NOW</a>
-		</div>
-		<div class="home-img">
-			<img src="img/sony.png" alt="">
-		</div>
+<div class="form-container">
+    <div class="profile-text">
+        <h2>MY ACCOUNT</h2>
+    </div>
 
-	</section>
+<form method="POST" action="{{ route('updateCust') }}">
+    @csrf
+    <div class="container-box">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ Auth::user()->cust_Name }}" required><br><br>
 
-	<section class="container">
-		<div class="container-box">
-			<img src="img/p1.png">
-			<h1>PHOTOGRAPHY</h1>
-			<br>
-			<h4>Photography is the art, application, and practice of creating images by recording light, 
-				either electronically by means of an image sensor, or chemically by means of a light-sensitive 
-				material such as photographic film. It is employed in many fields of science, manufacturing 
-				(e.g., photolithography), and business, as well as its more direct uses for art, film and 
-				video production, recreational purposes, hobby, and mass communication.</h4>
-		</div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ Auth::user()->cust_Email }}" required><br><br>
 
-		<div class="container-box">
-			<img src="img/p2.png">
-			<h1>VIDEOGRAPHY</h1>
-			<br>
-			<h4>Videography is the process of capturing moving images on electronic media (e.g., videotape, 
-				direct to disk recording, or solid state storage) and even streaming media. The term includes 
-				methods of video production and post-production. It used to be considered the video equivalent 
-				of cinematography (moving images recorded on film stock), but the advent of digital video recording 
-				in the late 20th century blurred the distinction between the two, as in both methods the intermediary 
-				mechanism became the same. Nowadays, any video work could be called videography, whereas commercial 
-				motion picture production would be called cinematography.</h4>
-		</div>
-	</section>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter new password"><br><br>
 
-	<!-- contact -->
+        <label for="password_confirmation">Confirm Password:</label>
+        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password"><br><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" value="{{ Auth::user()->cust_PhoneNum }}" pattern="^01[0-9]{8,9}$" required><br><br> 
+
+        <div class="btn-confirm">
+            <button type="submit" class="btn">SAVE</button>
+        </div>
+        <div class="btn-update2">
+            <a href="{{ route('viewCust') }}" class="btn2">CANCEL</a>
+        </div>
+    </div>
+</form>
+</div>
+ 
+ <!-- contact -->
 
 <section class="contact" id="contact">
 	<div class="contact-text">
@@ -121,6 +121,7 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <!---link to js---> 
 <script src="home.js"></script>
 	
+
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -130,17 +131,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var isOpen = false;
         var button = dropdown.querySelector('.hi');
         var dropdownContent = dropdown.querySelector('.dropdown-content');
-		var dropdownContentNew = dropdown.querySelector('.dropdown-content-New');
 
-		button.addEventListener('click', function(event) {
+        button.addEventListener('click', function(event) {
             event.stopPropagation(); // Prevent the click event from bubbling up
             isOpen = !isOpen;
-            if (dropdownContent) {
-                dropdownContent.style.display = isOpen ? 'block' : 'none';
-            }
-            if (dropdownContentNew) {
-                dropdownContentNew.style.display = isOpen ? 'block' : 'none';
-            }
+            dropdownContent.style.display = isOpen ? 'block' : 'none';
         });
 
         // Close dropdown when clicking outside of it
@@ -149,14 +144,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 isOpen = false;
                 dropdownContent.style.display = 'none';
             }
-			if (dropdownContentNew) {
-                    dropdownContentNew.style.display = 'none';
-            }
         });
     });
 });
 
-
+    //JavaScript to handle confirmation
+        function confirmChanges() {
+            if (confirm("Are you sure you want to change your details?")) {
+                // Submit the form or perform the necessary action
+                document.getElementById("profileForm").submit(); // Example: Submitting the form
+            }
+        }
+        function cancelChanges() {
+            // Handle cancellation, such as redirecting to another page
+            window.location.href = "dashboard.html"; // Example: Redirecting to the dashboard
+        }
 
 const header = document.querySelector("header");
 
@@ -186,7 +188,7 @@ const sr = ScrollReveal({
 
 sr.reveal ('.home-text',{delay:100});
 sr.reveal ('.home-img',{delay:100});
-sr.reveal ('.container-box',{delay:100});
+sr.reveal ('.form-container',{delay:100});
 sr.reveal ('.about-img',{delay:100});
 sr.reveal ('.about',{delay:100});
 sr.reveal ('.contact',{delay:100});

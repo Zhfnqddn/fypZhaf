@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <a href="{{ route('home') }}" class="logo"><img src="{{ asset('img/cam.png') }}">SHUTTER SEARCH & BOOKING</a>
+        <a href="{{ route('home') }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a>
         <div class="nav">
             <a href="{{ route('login') }}">LOGIN</a>
             <a href="{{ route('register') }}" class="active">REGISTER</a>

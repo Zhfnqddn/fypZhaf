@@ -19,9 +19,11 @@ class CreatePackageDetailsTable extends Migration
             $table->string('add_Ons');
             $table->string('add_Session');
             $table->string('add_Location');
+            $table->unsignedBigInteger('cust_ID');
             $table->unsignedBigInteger('package_ID');
             $table->timestamps();
 
+            $table->foreign('cust_ID')->references('cust_ID')->on('customers');
             $table->foreign('package_ID')->references('package_ID')->on('packages');
         });
     }

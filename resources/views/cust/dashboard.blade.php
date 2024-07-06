@@ -9,23 +9,22 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}?v={{ time() }}">
 
     <!---box icons--->	
-<link rel="stylesheet"
-href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" 
-rel="stylesheet">
+	<link rel="stylesheet"
+	href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" 
+	rel="stylesheet">
 
-<!---google fonts--->	
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?
-family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-</head>
+	<!---google fonts--->	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?
+	family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 </head>
 <body>
 
     <!---header--->
     <header>
-	<a href="{{ (route('dashboard')) }}" class="logo"><img src="img/cam.png">SHUTTER SEARCH & BOOKING</a> 
+	<a href="{{ (route('dashboard')) }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
 	
 	<ul class="navlist">
 		<li><a href="{{ (route('dashboard')) }}" class="active">HOME</a></li>
@@ -43,13 +42,14 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 				</div>
 			</div>
 	</ul>
+
 	
 	<div class="nav">
 	<div class="dropdown">
     <a href="#" class="hi">Hi {{ $user->name }} <i class="bx bx-chevron-down"></i></a>
     <div class="dropdown-content">
-			<a href="#">View Profile</a>
-			<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+	<a href="{{ route('viewCust') }}">View Profile</a>
+	<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 			<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     		@csrf
 			</form>

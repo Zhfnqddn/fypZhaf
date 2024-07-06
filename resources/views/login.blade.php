@@ -25,7 +25,7 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!---header--->
     <header>
-	<a href="{{ (route('home')) }}" class="logo"><img src="img/cam.png">SHUTTER SEARCH & BOOKING</a> 
+	<a href="{{ (route('home')) }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
 	
 	<div class="nav">
 		<a href="{{ (route('login')) }}" class="active">LOGIN</a>
