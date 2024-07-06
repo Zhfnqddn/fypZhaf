@@ -34,7 +34,7 @@
 			<div class="dropdown">
 				<a href="#" class="hi">SERVICES<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="#">EVENTS</a>
+					<a href="{{ (route('events')) }}">EVENTS</a>
 					<a href="#">BOOKING</a>
 					<a href="#">CUSTOM</a>
 					<a href="#">PAYMENT</a>

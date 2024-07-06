@@ -17,11 +17,11 @@ class CreateBookingsTable extends Migration
             $table->id('booking_ID');
             $table->date('start_Date');
             $table->date('end_Date');
-            $table->time('time_from');
-            $table->time('time_to');
+            $table->time('time_From');
+            $table->time('time_To');
             $table->string('location');
-            $table->decimal('total_price', 8, 2);
-            $table->string('booking_status');
+            $table->decimal('total_Price', 8, 2);
+            $table->string('booking_Status');
             $table->unsignedBigInteger('cust_ID');
             $table->unsignedBigInteger('package_ID');
             $table->timestamps();

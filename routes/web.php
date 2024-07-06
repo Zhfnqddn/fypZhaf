@@ -38,3 +38,11 @@ Route::middleware(['auth:staff'])->group(function () {
     Route::post('/updateStaff', [ViewStaffController::class, 'updateStaff'])->name('updateStaff');
     Route::get('/updStaff', [UpdStaffController::class, 'updStaff'])->name('updStaff');
 });
+
+
+Route::group(['middleware' => ['auth:staff']], function () {
+    Route::get('events/list', [EventController::class, 'listEvent'])->name('events.list');
+    Route::resource('events', EventController::class);
+    Route::get('/event', [EventController::class, 'event'])->name('event');
+    Route::get('events', [EventController::class, 'index'])->name('events');
+});
