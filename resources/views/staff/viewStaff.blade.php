@@ -70,16 +70,16 @@
 <form>
         <div class="container-box">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="staffName" value="{{ Auth::user()->staff_Name }}" required><br><br>
+            <input type="text" id="name" name="staffName" value="{{ Auth::user()->staff_Name }}" readonly><br><br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="staffEmail" value="{{ Auth::user()->staff_Email }}" required><br><br>
+            <input type="email" id="email" name="staffEmail" value="{{ Auth::user()->staff_Email }}" readonly><br><br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="staffPass" value="{{ Auth::user()->staff_Password }}" required><br><br>
+            <input type="password" id="password" name="staffPass" value="{{ Auth::user()->staff_Password }}" readonly><br><br>
 
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="staffPhoneNum" value="{{ Auth::user()->staff_PhoneNum }}" pattern="[0-9]{10}" required><br><br>
+            <input type="tel" id="phone" name="staffPhoneNum" value="{{ Auth::user()->staff_PhoneNum }}" pattern="[0-9]{10}" readonly><br><br>
 
             <label for="role">Role:</label>
             <input type="text" id="role" name="staffRole" value="{{ Auth::user()->staff_Role }}" readonly><br><br>

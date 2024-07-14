@@ -67,16 +67,16 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <form>
         <div class="container-box">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="CustName" value="{{ Auth::user()->cust_Name }}" required><br><br>
+            <input type="text" id="name" name="CustName" value="{{ Auth::user()->cust_Name }}" readonly><br><br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="CustEmail" value="{{ Auth::user()->cust_Email }}" required><br><br>
+            <input type="email" id="email" name="CustEmail" value="{{ Auth::user()->cust_Email }}" readonly><br><br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="CustPass" value="{{ Auth::user()->cust_Password }}" required><br><br>
+            <input type="password" id="password" name="CustPass" value="{{ Auth::user()->cust_Password }}" readonly><br><br>
 
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="CustPhoneNum" value="{{ Auth::user()->cust_PhoneNum }}" pattern="^01[0-9]{8,9}$" required><br><br>
+            <input type="tel" id="phone" name="CustPhoneNum" value="{{ Auth::user()->cust_PhoneNum }}" pattern="^01[0-9]{8,9}$" readonly><br><br>
 
             <div class="btn-update">
                 <a href="{{ route('updCust') }}" class="btn">UPDATE</a>

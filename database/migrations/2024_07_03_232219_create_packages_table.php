@@ -17,8 +17,12 @@ class CreatePackagesTable extends Migration
             $table->id('package_ID');
             $table->string('package_Name');
             $table->string('service_Type');
+            $table->date('start_Date');
+            $table->date('end_Date');
+            $table->time('time_From');
+            $table->time('time_To');
+            $table->string('location');
             $table->string('price_range');
-            $table->string('custom_Status');
             $table->unsignedBigInteger('staff_ID');
             $table->timestamps();
 

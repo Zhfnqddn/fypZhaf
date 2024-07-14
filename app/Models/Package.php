@@ -15,18 +15,17 @@ class Package extends Model
         'package_Name', 
         'service_Type', 
         'price_range', 
-        'custom_Status', 
+        'start_Date',
+        'end_Date',
+        'time_From',
+        'time_To',
+        'location',
         'staff_ID'
     ];
 
     public function details()
     {
         return $this->hasMany(PackageDetail::class, 'package_ID');
-    }
-
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class, 'package_ID');
     }
 
     public function staff()

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <meta name="csrf_token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -211,7 +211,7 @@
         }
 
         header.sticky{
-            padding: 15px 3%;
+            padding: 18px 6%;
             background: var(--second-color);
             color: #F1F1F2;
         }
@@ -301,7 +301,7 @@
 
      <!---header--->
      <header>
-	<a href="{{ (route('dashboardStaff')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SHUTTER SEARCH & BOOKING</a> 
+	<a href="{{ (route('dashboardStaff')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
     <h3>STAFF</h3>
 	
 	<ul class="navlist">
@@ -326,7 +326,7 @@
 	
 	<div class="nav">
 	<div class="dropdown">
-	<a href="#" class="hi">Hi {{ Auth::user()->name }} <i class="bx bx-chevron-down"></i></a>
+	<a href="#" class="hi">Hi {{ Auth::guard('staff')->user()->name }} <i class="bx bx-chevron-down"></i></a>
 		<div class="dropdown-content">
 		<a href="{{ (route('viewStaff')) }}">View Profile</a>
 		<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -360,10 +360,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
-  <script>
-    const modal = $('#modal-action')
-    const csrfToken = $('meta[name=csrf_token]').attr('content')
-    document.addEventListener('DOMContentLoaded', function() {
+<script>
+   const modal = $('#modal-action');
+   const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
@@ -371,14 +372,14 @@
         events: '{{ route('events.list') }}',
         editable: true,
         timeZone: 'UTC',
-        dateClick: function (info) {
+        dateClick: function(info) {
             $.ajax({
                 url: '{{ route('events.create') }}',
                 data: {
                     start_date: info.dateStr,
                     end_date: info.dateStr
                 },
-                success: function (res){
+                success: function(res) {
                     modal.html(res).modal('show');
 
                     $('.datepicker').datepicker({
@@ -386,60 +387,19 @@
                         format: 'yyyy-mm-dd'
                     });
 
-                    $('#form-action').on('submit', function(e) {
-                        e.preventDefault()
-                        const form = this
-                        const formData = new FormData(form)
-                        $.ajax({
-                            url: form.action,
-                            method: form.method,
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function (res){
-                                console.log('Response from server:', res);
-                                if (res.status === 'success') {
-                                    modal.modal('hide');
-                                    calendar.refetchEvents();
-                                } else {
-                                    alert('Failed to save the event');
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('AJAX Error:', status, error);
-                                alert('Error saving the event');
-                            }
-                        });
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error('AJAX Error:', status, error);
-                    alert('Error loading the form');
-                }
-            });
-        },
-
-        eventClick: function(info) {
-            console.log('Event clicked:', info.event);
-
-            $.ajax({
-                url: '{{ url('events') }}/' + info.event.id + '/edit',
-                success: function(res) {
-                    console.log('Edit form loaded:', res);
-                    modal.html(res).modal('show');
-
-                    $('#form-action').on('submit', function(e) {
+                    $('#form-action').off('submit').on('submit', function(e) {
                         e.preventDefault();
                         const form = this;
                         const formData = new FormData(form);
+                        formData.append('_token', csrfToken);
+
                         $.ajax({
                             url: form.action,
-                            method: form.method,
+                            method: 'POST', // For creating a new event
                             data: formData,
                             processData: false,
                             contentType: false,
                             success: function(res) {
-                                console.log('Response from server:', res);
                                 if (res.status === 'success') {
                                     modal.modal('hide');
                                     calendar.refetchEvents();
@@ -448,11 +408,83 @@
                                 }
                             },
                             error: function(xhr, status, error) {
-                                console.error('AJAX Error:', status, error);
-                                alert('Error saving the event');
+                                alert('Error saving the event: ' + xhr.responseText);
                             }
                         });
                     });
+                },
+                error: function(xhr, status, error) {
+                    alert('Error loading the form: ' + xhr.responseText);
+                }
+            });
+        },
+        eventClick: function(info) {
+            $.ajax({
+                url: '{{ url('events') }}/' + info.event.id + '/edit',
+                success: function(res) {
+                    modal.html(res).modal('show');
+                    console.log(" info.event.id " +  info.event.id);
+                    $('#form-action').attr('action', '{{ url('events') }}/' + info.event.id);
+                    $('#form-action').attr('method', 'POST');
+                    // Remove any existing _method hidden input to avoid duplication
+                    $('#form-action input[name="_method"]').remove();
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: '_method',
+                        value: 'PUT'
+                    }).appendTo('#form-action');
+
+                    $('#form-action').off('submit').on('submit', function(e) {
+                        e.preventDefault();
+                        const form = this;
+                        const formData = new FormData(form);
+                        formData.append('_token', csrfToken);
+
+                        $.ajax({
+                            url: form.action,
+                            method: 'POST', // Always POST, as we are adding _method=PUT for updates
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(res) {
+                                if (res.status === 'success') {
+                                    modal.modal('hide');
+                                    calendar.refetchEvents();
+                                } else {
+                                    alert('Failed to update the event');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                alert('Error updating the event: ' + xhr.responseText);
+                            }
+                        });
+                    });
+
+                    const deleteButton = document.getElementById('delete-event');
+                    if (deleteButton) {
+                        deleteButton.addEventListener('click', function() {
+                            if (confirm('Are you sure you want to delete this event?')) {
+                                $.ajax({
+                                    url: '{{ url('events') }}/' + info.event.id,
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken
+                                    },
+                                    success: function(res) {
+                                        if (res.status === 'success') {
+                                            modal.modal('hide');
+                                            calendar.refetchEvents();
+                                        } else {
+                                            alert('Failed to delete the event');
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        alert('Error deleting the event: ' + xhr.responseText);
+                                    }
+                                });
+                            }
+                        });
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error:', status, error);
@@ -460,11 +492,8 @@
                 }
             });
         },
-
         eventDrop: function(info) {
-            console.log('Event dropped:', info.event);
             const event = info.event;
-
             const startDate = event.start.toISOString().split('T')[0];
             let endDate = event.end ? event.end.toISOString().split('T')[0] : startDate;
 
@@ -482,20 +511,18 @@
                     id: event.id,
                     start_date: startDate,
                     end_date: endDate,
-                    title: event.title,
-                    service_type: event.extendedProps.serviceType,
                     time_from: event.extendedProps.timeFrom,
                     time_to: event.extendedProps.timeTo,
-                    package: event.extendedProps.package,
-                    package_price: event.extendedProps.packagePrice,
-                    category: event.extendedProps.category
+                    location: event.extendedProps.location,
+                    package_name: event.extendedProps.packageName,
+                    service_type: event.extendedProps.serviceType,
+                    price_range: event.extendedProps.priceRange,
                 },
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
                     'Accept': 'application/json'
                 },
                 success: function(res) {
-                    console.log('Event updated:', res);
                     calendar.refetchEvents();
                     iziToast.success({
                         title: 'Success',
@@ -504,12 +531,10 @@
                     });
                 },
                 error: function(xhr, status, error) {
-                    console.error('AJAX Error:', status, error);
-                    alert('Error updating the event');
+                    alert('Error updating the event: ' + xhr.responseText);
                 }
             });
         },
-
         eventResize: function(info) {
             const { event } = info;
             const startDate = event.start.toISOString().split('T')[0];
@@ -529,20 +554,18 @@
                     id: event.id,
                     start_date: startDate,
                     end_date: endDate,
-                    title: event.title,
-                    service_type: event.extendedProps.serviceType,
                     time_from: event.extendedProps.timeFrom,
                     time_to: event.extendedProps.timeTo,
-                    package: event.extendedProps.package,
-                    package_price: event.extendedProps.packagePrice,
-                    category: event.extendedProps.category
+                    location: event.extendedProps.location,
+                    package_name: event.extendedProps.packageName,
+                    service_type: event.extendedProps.serviceType,
+                    price_range: event.extendedProps.priceRange,
                 },
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
                     'Accept': 'application/json'
                 },
                 success: function(res) {
-                    console.log('Event updated:', res);
                     calendar.refetchEvents();
                     iziToast.success({
                         title: 'Success',
@@ -551,8 +574,7 @@
                     });
                 },
                 error: function(xhr, status, error) {
-                    console.error('AJAX Error:', status, error);
-                    alert('Error updating the event');
+                    alert('Error updating the event: ' + xhr.responseText);
                 }
             });
         }
@@ -560,77 +582,79 @@
     calendar.render();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    var dropdowns = document.querySelectorAll('.dropdown');
 
-    dropdowns.forEach(function(dropdown) {
-        var isOpen = false;
-        var button = dropdown.querySelector('.hi');
-        var dropdownContent = dropdown.querySelector('.dropdown-content');
-		var dropdownContentNew = dropdown.querySelector('.dropdown-content-New');
 
-		button.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent the click event from bubbling up
-            isOpen = !isOpen;
-            if (dropdownContent) {
-                dropdownContent.style.display = isOpen ? 'block' : 'none';
-            }
-            if (dropdownContentNew) {
-                dropdownContentNew.style.display = isOpen ? 'block' : 'none';
-            }
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdowns = document.querySelectorAll('.dropdown');
 
-        // Close dropdown when clicking outside of it
-        window.addEventListener('click', function(event) {
-            if (!dropdown.contains(event.target)) {
-                isOpen = false;
-                dropdownContent.style.display = 'none';
-            }
-			if (dropdownContentNew) {
-                    dropdownContentNew.style.display = 'none';
-            }
+        dropdowns.forEach(function(dropdown) {
+            var isOpen = false;
+            var button = dropdown.querySelector('.hi');
+            var dropdownContent = dropdown.querySelector('.dropdown-content');
+            var dropdownContentNew = dropdown.querySelector('.dropdown-content-New');
+
+            button.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent the click event from bubbling up
+                isOpen = !isOpen;
+                if (dropdownContent) {
+                    dropdownContent.style.display = 'block';
+                }
+                if (dropdownContentNew) {
+                    dropdownContentNew.style.display = 'block';
+                }
+            });
+
+            // Close dropdown when clicking outside of it
+            window.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target)) {
+                    isOpen = false;
+                    if (dropdownContent) {
+                        dropdownContent.style.display = 'none';
+                    }
+                    if (dropdownContentNew) {
+                        dropdownContentNew.style.display = 'none';
+                    }
+                }
+            });
         });
     });
-});
 
+    const header = document.querySelector("header");
 
+    window.addEventListener("scroll", function(){
+        header.classList.toggle("sticky", window.scrollY > 80);
+    });
 
-const header = document.querySelector("header");
+    let menu = document.querySelector('#menu-icon');
+    let navlist = document.querySelector('.navlist');
 
-window.addEventListener("scroll", function(){
-	header.classList.toggle("sticky", window.scrollY > 80);
-});
+    menu.onclick = () => {
+        menu.classList.toggle('bx-x');
+        navlist.classList.toggle('open');
+    }
 
-let menu = document.querySelector('#menu-icon');
-let navlist = document.querySelector('.navlist');
+    window.onscroll = () => {
+        menu.classList.remove('bx-x');
+        navlist.classList.remove('open');
+    }
 
-menu.onclick = () => {
-	menu.classList.toggle('bx-x');
-	navlist.classList.toggle('open');
-}
+    const sr = ScrollReveal({
+        origin: 'top',
+        distance: '85px',
+        duration: 2500,
+        reset: true
+    });
 
-window.onscroll = () => {
-	menu.classList.remove('bx-x');
-	navlist.classList.remove('open');
-}
-
-const sr = ScrollReveal({
-	origin: 'top',
-	distance: '85px',
-	duration: 2500,
-	reset: true
-})
-
-sr.reveal ('.home-text',{delay:100});
-sr.reveal ('.home-img',{delay:100});
-sr.reveal ('.container-box',{delay:100});
-sr.reveal ('.about-img',{delay:100});
-sr.reveal ('.about',{delay:100});
-sr.reveal ('.contact',{delay:100});
-sr.reveal ('.scroll',{delay:100});
-sr.reveal ('.search-bar',{delay:100});
-
+    sr.reveal('.home-text', {delay: 100});
+    sr.reveal('.home-img', {delay: 100});
+    sr.reveal('.container-box', {delay: 100});
+    sr.reveal('.about-img', {delay: 100});
+    sr.reveal('.about', {delay: 100});
+    sr.reveal('.contact', {delay: 100});
+    sr.reveal('.scroll', {delay: 100});
+    sr.reveal('.search-bar', {delay: 100});
 </script>
+
 
 </body>
 </html>

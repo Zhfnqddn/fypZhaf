@@ -1,83 +1,77 @@
 <x-modal-action :action="$action">
-    @if ($data->id)
+    @if ($data->package_ID)
         @method('PUT')
     @endif
     <div class="row">
         <div class="col-6">
             <div class="mb-3">
-                <input type="text" name="start_date" value="{{ $data->start_date }}" class="form-control datepicker" placeholder="Start Date">
+                <input type="text" name="start_date" value="{{ $data->start_Date }}" class="form-control datepicker" placeholder="Start Date">
             </div>
         </div>
         <div class="col-6">
             <div class="mb-3">
-                <input type="text" name="end_date"  value="{{ $data->end_date }}" class="form-control datepicker" placeholder="End Date">
+                <input type="text" name="end_date" value="{{ $data->end_Date }}" class="form-control datepicker" placeholder="End Date">
             </div>
-        </div>
-        <div class="col-12">
-            <textarea name="title" class="form-control" placeholder="Event Title">{{ $data->event_name }}</textarea>
-        </div>
-        <div class="col-12">
-            <div class="mb-3">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" id="category-success" value="success" {{ $data->category == 'success' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="category-success">Success</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" id="category-pending" value="pending" {{ $data->category == 'pending' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="category-pending">Pending</label>
-                </div>
-            </div>
-        </div>
-
-
-        
-        
-        <div class="col-12 mb-3">
-            <label for="service_type">Service Type</label>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="service_type" id="service_photographer" value="Photographer" {{ $data->service_type == 'Photographer' ? 'checked' : '' }}>
-                <label class="form-check-label" for="service_photographer">Photographer</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="service_type" id="service_videographer" value="Videographer" {{ $data->service_type == 'Videographer' ? 'checked' : '' }}>
-                <label class="form-check-label" for="service_videographer">Videographer</label>
-            </div>
-        </div>
-        <div class="col-6 mb-3">
-            <label for="time_from">Time From</label>
-            <input type="time" name="time_from" value="{{ $data->time_from }}" class="form-control">
-        </div>
-        <div class="col-6 mb-3">
-            <label for="time_to">Time To</label>
-            <input type="time" name="time_to" value="{{ $data->time_to }}" class="form-control">
         </div>
         <div class="col-12 mb-3">
-            <label for="package">Package</label>
-            <select name="package" class="form-select">
-                <option value="Wedding" {{ $data->package == 'Wedding' ? 'selected' : '' }}>Wedding</option>
-                <option value="Graduation" {{ $data->package == 'Graduation' ? 'selected' : '' }}>Graduation</option>
-                <option value="Birthday party" {{ $data->package == 'Birthday party' ? 'selected' : '' }}>Birthday party</option>
-                <option value="Engagement" {{ $data->package == 'Engagement' ? 'selected' : '' }}>Engagement</option>
-                <option value="Studio Photoshoot" {{ $data->package == 'Studio Photoshoot' ? 'selected' : '' }}>Studio Photoshoot</option>
+            <label for="package_name">Package Name</label>
+            <select name="package_name" class="form-select">
+                <option value="" selected disabled>Select...</option>
+                <option value="Wedding" {{ $data->package_Name == 'Wedding' ? 'selected' : '' }}>Wedding</option>
+                <option value="Graduation" {{ $data->package_Name == 'Graduation' ? 'selected' : '' }}>Graduation</option>
+                <option value="Birthday Party" {{ $data->package_Name == 'Birthday Party' ? 'selected' : '' }}>Birthday Party</option>
+                <option value="Engagement" {{ $data->package_Name == 'Engagement' ? 'selected' : '' }}>Engagement</option>
+                <option value="Studio Photoshoot" {{ $data->package_Name == 'Studio Photoshoot' ? 'selected' : '' }}>Studio Photoshoot</option>
             </select>
         </div>
         <div class="col-12 mb-3">
-            <label for="package_price">Package Price (RM)</label>
-            <input type="number" name="package_price" value="{{ $data->package_price }}" class="form-control" min="0" max="10000" step="0.01">
+            <label for="service_type">Service Type</label>
+            <select name="service_type" class="form-select">
+                <option value="" selected disabled>Select...</option>
+                <option value="Photographer" {{ $data->service_Type == 'Photographer' ? 'selected' : '' }}>Photographer</option>
+                <option value="Videographer" {{ $data->service_Type == 'Videographer' ? 'selected' : '' }}>Videographer</option>
+            </select>
         </div>
-
-
-
-
-
-
-        <div class="col-12">
-            <div class="mb-3">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="delete" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Delete</label>
+        <div class="col-12 mb-3">
+            <label for="priceRange">PRICE RANGE (RM) :</label>
+            <input type="range" id="priceRange" name="price_range" min="0" max="10000" step="100" oninput="this.nextElementSibling.value = this.value" value="{{ $data->price_range }}">
+            <output>{{ $data->price_range }}</output>
+        </div>
+        <div class="col-6 mb-3">
+            <label for="time_from">Time From</label>
+            <input type="time" name="time_from" value="{{ $data->time_From }}" class="form-control">
+        </div>
+        <div class="col-6 mb-3">
+            <label for="time_to">Time To</label>
+            <input type="time" name="time_to" value="{{ $data->time_To }}" class="form-control">
+        </div>
+        <div class="col-12 mb-3">
+            <label for="location">Location</label>
+            <select name="location" class="form-select">
+                <option value="" selected disabled>Select...</option>
+                <option value="Cheras" {{ $data->location == 'Cheras' ? 'selected' : '' }}>Cheras</option>
+                <option value="Ampang" {{ $data->location == 'Ampang' ? 'selected' : '' }}>Ampang</option>
+                <option value="Kajang" {{ $data->location == 'Kajang' ? 'selected' : '' }}>Kajang</option>
+                <option value="Semenyih" {{ $data->location == 'Semenyih' ? 'selected' : '' }}>Semenyih</option>
+                <option value="Batu Caves" {{ $data->location == 'Batu Caves' ? 'selected' : '' }}>Batu Caves</option>
+                <option value="Rawang" {{ $data->location == 'Rawang' ? 'selected' : '' }}>Rawang</option>
+                <option value="Setapak" {{ $data->location == 'Setapak' ? 'selected' : '' }}>Setapak</option>
+                <option value="Dengkil" {{ $data->location == 'Dengkil' ? 'selected' : '' }}>Dengkil</option>
+                <option value="Sepang" {{ $data->location == 'Sepang' ? 'selected' : '' }}>Sepang</option>
+                <option value="Petaling Jaya" {{ $data->location == 'Petaling Jaya' ? 'selected' : '' }}>Petaling Jaya</option>
+                <option value="Shah Alam" {{ $data->location == 'Shah Alam' ? 'selected' : '' }}>Shah Alam</option>
+                <option value="Damansara" {{ $data->location == 'Damansara' ? 'selected' : '' }}>Damansara</option>
+                <option value="Sungai Buloh" {{ $data->location == 'Sungai Buloh' ? 'selected' : '' }}>Sungai Buloh</option>
+                <option value="Subang" {{ $data->location == 'Subang' ? 'selected' : '' }}>Subang</option>
+                <option value="Puchong" {{ $data->location == 'Puchong' ? 'selected' : '' }}>Puchong</option>
+            </select>
+        </div>
+        @if ($data->package_ID)
+            <div class="col-12">
+                <div class="mb-3">
+                    <button type="button" id="delete-event" class="btn btn-danger">Delete</button>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 </x-modal-action>
