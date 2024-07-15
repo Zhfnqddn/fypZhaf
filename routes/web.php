@@ -10,6 +10,8 @@ use App\Http\Controllers\UpdCustController;
 use App\Http\Controllers\ViewStaffController;
 use App\Http\Controllers\UpdStaffController;
 use App\Models\Package;
+use App\Http\Controllers\EventController;
+
 
 Route::get('/', [DashboardController::class, 'home'])->name('home');
 
@@ -43,8 +45,10 @@ Route::middleware(['auth:staff'])->group(function () {
 
 Route::group(['middleware' => ['auth:staff']], function () {
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::put('events/{package}', [EventController::class, 'update'])->name('events.update');
     Route::get('events/list', [EventController::class, 'listEvent'])->name('events.list');
     Route::resource('events', EventController::class);
-    Route::get('/event', [EventController::class, 'event'])->name('event');
+    // Remove or correct the following line
+    // Route::get('/event', [EventController::class, 'event'])->name('event');
     Route::get('events', [EventController::class, 'index'])->name('events.index'); // Updated to use 'events.index'
 });

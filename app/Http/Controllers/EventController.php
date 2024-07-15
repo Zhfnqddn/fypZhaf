@@ -20,20 +20,20 @@ class EventController extends Controller
         $staffId = Auth::guard('staff')->id();
 
         $events = Package::where('start_Date', '>=', $start)
-        ->where('end_Date', '<=', $end)
-        ->where('staff_ID', $staffId) // Filter by staff_ID
-        ->get()
-        ->map(fn ($item) => [
-            'id' => $item->package_ID,
-            'packageName' => $item->package_Name,
-            'serviceType' => $item->service_Type,
-            'start' => $item->start_Date,
-            'end' => date('Y-m-d', strtotime($item->end_Date . '+1 days')),
-            'timeFrom' => $item->time_From,
-            'timeTo' => $item->time_To,
-            'location' => $item->location,
-            'priceRange' => $item->price_range,
-        ]);
+            ->where('end_Date', '<=', $end)
+            ->where('staff_ID', $staffId) // Filter by staff_ID
+            ->get()
+            ->map(fn ($item) => [
+                'id' => $item->package_ID,
+                'packageName' => $item->package_Name,
+                'serviceType' => $item->service_Type,
+                'start' => $item->start_Date,
+                'end' => date('Y-m-d', strtotime($item->end_Date . '+1 days')),
+                'timeFrom' => $item->time_From,
+                'timeTo' => $item->time_To,
+                'location' => $item->location,
+                'priceRange' => $item->price_range,
+            ]);
 
         \Log::info('Events loaded:', $events->toArray());
 
@@ -46,7 +46,14 @@ class EventController extends Controller
         $event->start_Date = $request->start_date;
         $event->end_Date = $request->end_date;
 
-        return view('event-form', ['data' => $event, 'action' => route('events.store')]);
+        // Automatically set the service_type based on the authenticated staff's role
+        $staffRole = Auth::guard('staff')->user()->staff_Role;
+
+        return view('event-form', [
+            'data' => $event,
+            'action' => route('events.store'),
+            'staffRole' => $staffRole // Pass the staffRole to the view
+        ]);
     }
 
     public function store(Request $request)
@@ -55,7 +62,6 @@ class EventController extends Controller
 
         $validator = \Validator::make($request->all(), [
             'package_name' => 'required|string',
-            'service_type' => 'required|string',
             'price_range' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
@@ -80,9 +86,11 @@ class EventController extends Controller
                 throw new \Exception('Authenticated user not found.');
             }
 
+            $staffRole = Auth::guard('staff')->user()->staff_Role;
+
             $package = new Package();
             $package->package_Name = $request->package_name;
-            $package->service_Type = $request->service_type;
+            $package->service_Type = $staffRole; // Automatically set service_type based on staff_Role
             $package->price_range = $request->price_range;
             $package->start_Date = $request->start_date;
             $package->end_Date = $request->end_date;
@@ -118,7 +126,6 @@ class EventController extends Controller
         return view('event-form', ['data' => $event, 'action' => route('events.update', $event->package_ID)]);
     }
 
-
     public function update(Request $request, $package_ID)
     {
         \Log::info('Update event request data:', $request->all());
@@ -140,7 +147,6 @@ class EventController extends Controller
             'time_to' => 'required',
             'location' => 'required|string',
             'package_name' => 'required|string',
-            'service_type' => 'required|string',
             'price_range' => 'required|numeric',
         ]);
 
@@ -159,7 +165,7 @@ class EventController extends Controller
         $package->time_To = $request->time_to;
         $package->location = $request->location;
         $package->package_Name = $request->package_name;
-        $package->service_Type = $request->service_type;
+        $package->service_Type = Auth::guard('staff')->user()->staff_Role; // Automatically set service_type based on staff_Role
         $package->price_range = $request->price_range;
         $package->staff_ID = Auth::guard('staff')->id(); // Ensure staff_ID is set
 
@@ -184,7 +190,6 @@ class EventController extends Controller
             'message' => 'Update data successfully'
         ]);
     }
-
 
     public function destroy(Package $event)
     {

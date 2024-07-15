@@ -24,14 +24,14 @@
                 <option value="Studio Photoshoot" {{ $data->package_Name == 'Studio Photoshoot' ? 'selected' : '' }}>Studio Photoshoot</option>
             </select>
         </div>
-        <div class="col-12 mb-3">
+        <!-- <div class="col-12 mb-3">
             <label for="service_type">Service Type</label>
             <select name="service_type" class="form-select">
                 <option value="" selected disabled>Select...</option>
                 <option value="Photographer" {{ $data->service_Type == 'Photographer' ? 'selected' : '' }}>Photographer</option>
                 <option value="Videographer" {{ $data->service_Type == 'Videographer' ? 'selected' : '' }}>Videographer</option>
             </select>
-        </div>
+        </div> -->
         <div class="col-12 mb-3">
             <label for="priceRange">PRICE RANGE (RM) :</label>
             <input type="range" id="priceRange" name="price_range" min="0" max="10000" step="100" oninput="this.nextElementSibling.value = this.value" value="{{ $data->price_range }}">

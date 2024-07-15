@@ -309,7 +309,7 @@
 			<div class="dropdown">
 				<a href="#" class="hi & active">SERVICES<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="{{ (route('events')) }}">EVENTS</a>
+					<a href="{{ (route('events.index')) }}">EVENTS</a>
 					<a href="#">BOOKING</a>
 					<a href="#">CUSTOM</a>
 					<a href="#">PAYMENT</a>
@@ -577,6 +577,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Error updating the event: ' + xhr.responseText);
                 }
             });
+        },
+        eventContent: function(arg) {
+            let eventTitle = document.createElement('div');
+            eventTitle.classList.add('fc-event-title');
+            eventTitle.innerHTML = arg.event.extendedProps.packageName;
+
+            let arrayOfDomNodes = [ eventTitle ];
+            return { domNodes: arrayOfDomNodes };
         }
     });
     calendar.render();

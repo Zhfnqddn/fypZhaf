@@ -75,9 +75,9 @@
                 <div class="input-box">
                     <select name="role" required>
                         <option value="" selected disabled>Select...</option>
-                        <option value="photographer" {{ old('role') == 'photographer' ? 'selected' : '' }}>Photographer</option>
-                        <option value="videographer" {{ old('role') == 'videographer' ? 'selected' : '' }}>Videographer</option>
-                        <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>Customer</option>
+                        <option value="Photographer" {{ old('role') == 'Photographer' ? 'selected' : '' }}>Photographer</option>
+                        <option value="Videographer" {{ old('role') == 'Videographer' ? 'selected' : '' }}>Videographer</option>
+                        <option value="Customer" {{ old('role') == 'Customer' ? 'selected' : '' }}>Customer</option>
                     </select>
                 </div>
             </div>
