@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Picture;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -58,5 +60,10 @@ class BookingController extends Controller
         return view('cust.listBooking', compact('packages'));
     }
     
+    public function showBookingPage($packageId)
+    {
+        $package = Package::findOrFail($packageId);
+        return view('cust.booking', compact('package'));
+    }
 }
 

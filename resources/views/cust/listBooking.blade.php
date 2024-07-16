@@ -75,8 +75,7 @@
                     <input type="text" id="priceRange" name="priceRange" value="RM{{ $package->price_range }}" readonly>
                 </div>
             </div>
-            <button class="view-button">View</button>
-        </div>
+            <a href="{{ route('showBookingPage', $package->package_ID) }}" class="view-button">View</a>        </div>
         @endforeach
     </section>
 

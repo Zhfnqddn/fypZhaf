@@ -59,6 +59,7 @@ Route::get('/booking', [BookingController::class, 'booking'])->name('booking');
 Route::get('/list-booking', [BookingController::class, 'list'])->name('listBooking');
 Route::get('/booking/{packageId}/{custId}', [BookingController::class, 'showBookingPage'])->name('showBookingPage');
 Route::post('/make-booking', [BookingController::class, 'makeBooking'])->name('makeBooking');
+Route::get('/booking/{packageId}', [BookingController::class, 'showBookingPage'])->name('showBookingPage');
 
 
 Route::group(['middleware' => ['auth:staff']], function () {

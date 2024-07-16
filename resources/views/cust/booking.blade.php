@@ -48,7 +48,7 @@
     </header>
 
     <div class="font">
-        <h2>NISHI.FOTO</h2>
+        <h2>BOOKING</h2>
         </div>
         <section class="container">
             <div class="image-gallery-container">
@@ -60,54 +60,54 @@
                 </div>
             </div>
             <div class="info-container">
-                <div class="info">
-                    <div class="info-item">
-                        <label for="staffName"><strong>Staff Name:</strong></label>
-                        <input type="text" id="staffName" name="staffName" value="Ahmad Biddin">
-                    </div>
-        
-                    <div class="info-item">
-                        <label for="packageName"><strong>Package Name:</strong></label>
-                        <input type="text" id="packageName" name="packageName" value="Wedding">
-                    </div>
-        
-                    <div class="info-item">
-                        <label for="startDate"><strong>Start Date:</strong></label>
-                        <input type="date" id="startDate" name="startDate" value="2024-08-25">
-                    </div>
-        
-                    <div class="info-item">
-                        <label for="endDate"><strong>End Date:</strong></label>
-                        <input type="date" id="endDate" name="endDate" value="2024-08-25">
-                    </div>
-        
-                    <div class="info-item">
-                        <label for="timeFrom"><strong>Time From:</strong></label>
-                        <input type="time" id="timeFrom" name="timeFrom" value="13:00">
-                    </div>
-        
-                    <div class="info-item">
-                        <label for="timeTo"><strong>Time To:</strong></label>
-                        <input type="time" id="timeTo" name="timeTo" value="15:00">
-                    </div>
-        
-                    <div class="info-item">
-                        <label for="location"><strong>Location:</strong></label>
-                        <input type="text" id="location" name="location" value="Ampang">
-                    </div>
-        
-                    <div class="info-item">
-                        <label for="totalPrice"><strong>Total Price:</strong></label>
-                        <input type="text" id="totalPrice" name="totalPrice" value="RM2000">
-                    </div>
-        
-                    <div class="button-group">
-                        <button class="custom-package">Custom Package</button>
-                        <button id="goToPage" class="book-button">Book</button>
-                    </div>
+            <div class="info">
+                <div class="info-item">
+                    <label for="staffName"><strong>Staff Name:</strong></label>
+                    <input type="text" id="staffName" name="staffName" value="{{ $package->staff->name }}" readonly>
+                </div>
+    
+                <div class="info-item">
+                    <label for="packageName"><strong>Package Name:</strong></label>
+                    <input type="text" id="packageName" name="packageName" value="{{ $package->package_Name }}" readonly>
+                </div>
+    
+                <div class="info-item">
+                    <label for="startDate"><strong>Start Date:</strong></label>
+                    <input type="date" id="startDate" name="startDate" value="{{ $package->start_Date }}" readonly>
+                </div>
+    
+                <div class="info-item">
+                    <label for="endDate"><strong>End Date:</strong></label>
+                    <input type="date" id="endDate" name="endDate" value="{{ $package->end_Date }}" readonly>
+                </div>
+    
+                <div class="info-item">
+                    <label for="timeFrom"><strong>Time From:</strong></label>
+                    <input type="time" id="timeFrom" name="timeFrom" value="{{ $package->time_From }}" readonly>
+                </div>
+    
+                <div class="info-item">
+                    <label for="timeTo"><strong>Time To:</strong></label>
+                    <input type="time" id="timeTo" name="timeTo" value="{{ $package->time_To }}" readonly>
+                </div>
+    
+                <div class="info-item">
+                    <label for="location"><strong>Location:</strong></label>
+                    <input type="text" id="location" name="location" value="{{ $package->location }}" readonly>
+                </div>
+    
+                <div class="info-item">
+                    <label for="totalPrice"><strong>Total Price:</strong></label>
+                    <input type="text" id="totalPrice" name="totalPrice" value="RM{{ $package->price_range }}" readonly>
+                </div>
+    
+                <div class="button-group">
+                    <button class="custom-package">Custom Package</button>
+                    <button id="goToPage" class="book-button">Book</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <!-- contact -->
     <section class="contact" id="contact">
