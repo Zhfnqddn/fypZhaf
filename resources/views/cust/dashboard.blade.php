@@ -31,7 +31,7 @@
 			<div class="dropdown">
 				<a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="#">EVENTS</a>
+					<a href="{{ (route('filter')) }}">EVENTS</a>
 					<a href="#">VIEW BOOKING</a>
 				</div>
 			</div>

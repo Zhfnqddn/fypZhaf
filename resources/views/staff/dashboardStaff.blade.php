@@ -43,8 +43,8 @@
 			<div class="dropdown">
 				<a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="#">PHOTOGRAPHER</a>
-					<a href="#">VIDEOGRAPHER</a>
+					<a href="{{ route('staff.pictures.index') }}">PHOTOGRAPHER</a>
+					<a href="{{ route('staff.videos.index') }}">VIDEOGRAPHER</a>
 				</div>
 			</div>
 	</ul>

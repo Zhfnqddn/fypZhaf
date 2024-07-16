@@ -11,6 +11,8 @@ use App\Http\Controllers\ViewStaffController;
 use App\Http\Controllers\UpdStaffController;
 use App\Models\Package;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PortfolioController;
 
 
 Route::get('/', [DashboardController::class, 'home'])->name('home');
@@ -42,7 +44,6 @@ Route::middleware(['auth:staff'])->group(function () {
     Route::get('/updStaff', [UpdStaffController::class, 'updStaff'])->name('updStaff');
 });
 
-
 Route::group(['middleware' => ['auth:staff']], function () {
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::put('events/{package}', [EventController::class, 'update'])->name('events.update');
@@ -51,4 +52,21 @@ Route::group(['middleware' => ['auth:staff']], function () {
     // Remove or correct the following line
     // Route::get('/event', [EventController::class, 'event'])->name('event');
     Route::get('events', [EventController::class, 'index'])->name('events.index'); // Updated to use 'events.index'
+});
+
+Route::get('/filter', [BookingController::class, 'filter'])->name('filter');
+Route::get('/booking', [BookingController::class, 'booking'])->name('booking');
+Route::get('/list-booking', [BookingController::class, 'list'])->name('listBooking');
+Route::get('/booking/{packageId}/{custId}', [BookingController::class, 'showBookingPage'])->name('showBookingPage');
+Route::post('/make-booking', [BookingController::class, 'makeBooking'])->name('makeBooking');
+
+
+Route::group(['middleware' => ['auth:staff']], function () {
+    Route::get('pictures', [PortfolioController::class, 'indexPictures'])->name('staff.pictures.index');
+    Route::post('pictures', [PortfolioController::class, 'storePicture'])->name('staff.pictures.store');
+    Route::delete('pictures/{picture}', [PortfolioController::class, 'destroyPicture'])->name('staff.pictures.destroy');
+
+    Route::get('videos', [PortfolioController::class, 'indexVideos'])->name('staff.videos.index');
+    Route::post('videos', [PortfolioController::class, 'storeVideo'])->name('staff.videos.store');
+    Route::delete('videos/{video}', [PortfolioController::class, 'destroyVideo'])->name('staff.videos.destroy');
 });
