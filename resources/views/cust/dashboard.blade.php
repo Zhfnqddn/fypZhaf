@@ -32,7 +32,7 @@
 				<a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
 					<a href="{{ (route('filter')) }}">EVENTS</a>
-					<a href="#">VIEW BOOKING</a>
+					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>customer-bookings
 				</div>
 			</div>
 			<div class="dropdown">

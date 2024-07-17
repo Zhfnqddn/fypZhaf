@@ -115,8 +115,17 @@
                     <form action="{{ route('customizePackageForm', ['packageId' => $package->package_ID]) }}" method="GET">
                         <button type="submit" class="custom-package">Custom Package</button>
                     </form>
-                    <button id="goToPage" class="book-button">Book</button>
                 </div>
+                <div class="button-group">
+    <form action="{{ route('bookPackage', ['packageId' => $package->package_ID]) }}" method="POST">
+        @csrf
+        <input type="hidden" name="total_Price" value="{{ $package->price_range }}">
+        <input type="hidden" name="cust_ID" value="{{ Auth::guard('customer')->user()->cust_ID }}">
+        <input type="hidden" name="package_ID" value="{{ $package->package_ID }}">
+        <input type="hidden" name="package_detail_ID" value="{{ $package->package_detail_ID ?? null }}">
+        <button type="submit" class="book-button">Book</button>
+    </form>
+</div>
             </div>
         </div>
     </section>
@@ -144,6 +153,13 @@
     <script src="home.js"></script>
 
     <script>
+                document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+                alert("{{ session('success') }}");
+                window.location.href = '{{ route('dashboard') }}';
+            @endif
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             var dropdowns = document.querySelectorAll('.dropdown');
             dropdowns.forEach(function(dropdown) {
@@ -216,6 +232,20 @@
         document.getElementById('goToPage').addEventListener('click', function() {
             window.location.href = 'booking3.html';
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded and parsed');
+        @if(session('success'))
+            console.log('Success message: {{ session('success') }}');
+            alert("{{ session('success') }}");
+            window.location.href = '{{ route('dashboard') }}';
+        @endif
+
+        @if(session('error'))
+            console.log('Error message: {{ session('error') }}');
+            alert("{{ session('error') }}");
+        @endif
+    });
     </script>
 </body>
 </html>

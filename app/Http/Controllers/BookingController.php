@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Package;
 use App\Models\Booking;
 use App\Models\PackageDetail;
@@ -79,6 +80,54 @@ class BookingController extends Controller
         
             return view('cust.booking', compact('package', 'pictures', 'videos'));
         }
+
+
+        public function storeBooking(Request $request, $packageId)
+        {
+            Log::info('storeBooking called');
+            Log::info('Request data: ', $request->all());
+    
+            $request->validate([
+                'total_Price' => 'required|numeric',
+                'cust_ID' => 'required|exists:customers,cust_ID',
+                'package_ID' => 'required|exists:packages,package_ID',
+                'package_detail_ID' => 'nullable|exists:package_details,package_detail_ID',
+            ]);
+    
+            Log::info('Validation passed');
+    
+            try {
+                $booking = new Booking();
+                $booking->total_Price = $request->input('total_Price');
+                $booking->booking_Status = 'Pending';
+                $booking->custom_Status = 'Not Customized';
+                $booking->cust_ID = $request->input('cust_ID');
+                $booking->package_ID = $packageId;
+                $booking->package_detail_ID = $request->input('package_detail_ID'); // This can be null
+                $booking->save();
+    
+                Log::info('Booking saved successfully');
+    
+                return redirect()->route('dashboard')->with('success', 'Your booking is pending');
+            } catch (\Exception $e) {
+                Log::error('Error saving booking: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Failed to book package.');
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

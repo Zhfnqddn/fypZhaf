@@ -13,6 +13,7 @@ use App\Models\Package;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\StatusController;
 
 
 Route::get('/', [DashboardController::class, 'home'])->name('home');
@@ -63,6 +64,10 @@ Route::get('/booking/{packageId}', [BookingController::class, 'showBookingPage']
 Route::post('/customize-package/{packageId}', [BookingController::class, 'customizePackage'])->name('customizePackage');
 Route::get('/customize-package-form/{packageId}', [BookingController::class, 'showCustomizeForm'])->name('customizePackageForm');
 
+Route::middleware('auth:customer')->group(function () {
+    Route::post('/book-package/{packageId}', [BookingController::class, 'storeBooking'])->name('bookPackage');
+});
+
 
 Route::group(['middleware' => ['auth:staff']], function () {
     Route::get('pictures', [PortfolioController::class, 'indexPictures'])->name('staff.pictures.index');
@@ -73,3 +78,11 @@ Route::group(['middleware' => ['auth:staff']], function () {
     Route::post('videos', [PortfolioController::class, 'storeVideo'])->name('staff.videos.store');
     Route::delete('videos/{video}', [PortfolioController::class, 'destroyVideo'])->name('staff.videos.destroy');
 });
+
+Route::get('/accept-booking/{bookingId}', [StatusController::class, 'acceptBooking'])->name('accept-booking');
+Route::get('/reject-booking/{bookingId}', [StatusController::class, 'rejectBooking'])->name('reject-booking');
+Route::get('/bookings', [StatusController::class, 'showBookings'])->name('bookings');
+
+Route::get('/customer/bookings', [StatusController::class, 'showCustomerBookings'])->name('customer.bookings');
+Route::post('/customer/bookings/{bookingId}/cancel', [StatusController::class, 'cancelBooking'])->name('customer.cancelBooking');
+Route::post('/customer/bookings/{bookingId}/payment', [StatusController::class, 'makePayment'])->name('customer.makePayment');
