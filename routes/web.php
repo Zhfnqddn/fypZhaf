@@ -60,6 +60,8 @@ Route::get('/list-booking', [BookingController::class, 'list'])->name('listBooki
 Route::get('/booking/{packageId}/{custId}', [BookingController::class, 'showBookingPage'])->name('showBookingPage');
 Route::post('/make-booking', [BookingController::class, 'makeBooking'])->name('makeBooking');
 Route::get('/booking/{packageId}', [BookingController::class, 'showBookingPage'])->name('showBookingPage');
+Route::post('/customize-package/{packageId}', [BookingController::class, 'customizePackage'])->name('customizePackage');
+Route::get('/customize-package-form/{packageId}', [BookingController::class, 'showCustomizeForm'])->name('customizePackageForm');
 
 
 Route::group(['middleware' => ['auth:staff']], function () {

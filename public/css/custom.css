@@ -1,0 +1,372 @@
+@charset "ISO-8859-1";
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', 'san-serif';
+	list-style: none;
+	text-decoration: none;
+	scroll-behavior: smooth;
+	scroll-padding-top: 3rem;
+}
+:root{
+	--main-color: #8A00FF;
+	--text-color: #fff;
+	--other-color: #212121;
+	--second-color: #1C1C1C;
+	--bg-color: #111111;
+
+	--big-font: 4.5rem;
+	--h2-font: 2.6rem;
+	--p-font: 1.1rem;
+}
+body{
+	background: var(--bg-color);
+	color: var(--text-color); 
+}
+
+header{
+	position:fixed;
+	width: 100%;
+	top: 0;
+	right: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: transparent;
+	padding: 30px 3%;
+	transition: all .50s ease;	
+}
+
+.logo{
+	display: flex;
+	align-items: center;
+	color: var(--text-color);
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.logo img{
+	vertical-align: middle;
+	margin-right: 8px;
+	color: var(--second-color);
+	width: 100px;
+	height: auto;
+}
+
+.navlist{
+	display: flex;
+}
+
+.navlist a{
+	color: var(--text-color);
+	font-size: var(--p-font);
+	font-weight: 600;
+	margin: 0 30px;
+	transition: all .50s ease;
+}
+.navlist a:hover{
+	color: #8A00FF;
+}
+.navlist a.active{
+	color: #8A00FF;
+}
+.nav{
+	display: flex;
+}
+
+.nav a{
+	color: white;
+	font-size: var(--p-font);
+	font-weight: 600;
+	margin: 0 13px;
+	transition: all .50s ease;
+	align-items: center;
+	padding: 8px 15px;
+	background: var(--main-color);
+	border-radius: 3rem;
+	box-shadow: #B026FF 0px 1px 15px;
+}
+
+.nav a:hover {
+    background-color: black;
+    color: black;
+    box-shadow: #B026FF 0px 1px 15px;
+  }
+  
+  .nav a.active{
+      background-color: var(--bg-color);
+  }
+  
+  #menu-icon{
+      font-size: 32px;
+      color: black;
+      z-index: 10001;
+      cursor: pointer;
+      padding: 8px 15px;
+      display: none;
+  }
+  .nav a:hover{
+      transform: scale(1.1);
+      color: var(--text-color);
+  }
+
+  section{
+	padding: 70px 14% 60px;
+}
+
+header.sticky{
+	padding: 18px 6%;
+	background: var(--second-color);
+	color: #F1F1F2;
+}
+
+/*end of header*/
+
+.btn{
+	display: inline-block;
+	padding: 15px 35px;
+	background: var(--main-color);
+	color: black;
+	font-size: var(--p-font);
+	font-weight: 500;
+	letter-spacing: 1px;
+	border-radius: 3rem;
+	transition: all .50s ease;
+	box-shadow: #B026FF 0px 1px 23px;
+}
+
+.btn:hover{
+	background: black;
+	color: var(--text-color);
+	box-shadow: #B026FF 0px 1px 23px;
+}
+
+/*start footer*/
+.contact-text{
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+.contact-text h2{
+	text-align: center;
+	font-size: var(--h2-font);
+	margin-bottom: 10px;
+	color: var(--main-color);
+}
+
+.contact-text p{
+	text-align: center;
+	color: white;
+	font-size: var(--p-font);
+	line-height: 30px;
+	margin-bottom: 3rem;	
+}
+
+.social i{
+	display: inline-block;
+	font-size: 32px;
+	color: white;
+	margin: 0 20px;
+	transition: all .50s ease;
+}
+
+.social .clr i{
+	color: var(--main-color);
+}
+
+.social i:hover{
+	color: var(--main-color);
+}
+
+/*end footer*/
+
+.scroll{
+	position: fixed;
+	bottom: 2.2rem;
+	border-top: 2rem;
+	right: 3.2rem;
+}
+
+.scroll i{
+	font-size: 22px;
+	color: var(--second-color);
+	background: var(--main-color);
+	padding: 10px;
+	border-radius: 2rem;
+}
+
+/*Dropdown*/
+/* Dropdown Button */
+.hi {
+    cursor: pointer;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+	margin-top: 10px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+	margin-top: 10px;
+	font-size: 15px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: var(--bg-color);
+}
+
+/* Show the dropdown content on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*dropdown1*/
+.dropdown-content-New {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+	margin-top: 10px;
+	background-color: white;
+	border-radius: 10px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content-New a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+	margin-top: 10px;
+	font-size: 15px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 30px 14% 70px;
+    color: var(--main-color);
+    margin-top: 40px;
+}
+
+.info-container {
+    background: var(--second-color);
+    border-radius: 3rem;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: #B026FF 0px 1px 13px;
+    width: 900px;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    color: var(--text-color);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-item label {
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.info-item input[type="checkbox"]{
+    width: auto;
+	height: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+	box-shadow: #B026FF 0px 1px 13px;
+}
+
+
+.info-item select {
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    grid-column: span 2;
+    justify-content: center;
+}
+
+.cancel-button {
+    background-color: red;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: red 0px 1px 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cancel-button:hover {
+    background: #8B0000;
+    color: var(--text-color);
+    box-shadow: red 0px 1px 15px;
+}
+
+.confirm-button{
+    background-color: #4CBB17;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: #4CBB17 0px 1px 15px;
+    font-size: 16px;
+    font-weight: 600; 
+}
+
+.confirm-button:hover{
+    background: #008000;
+    color: var(--text-color);
+    box-shadow: #4CBB17 0px 1px 15px;
+}
+
+
+.font h2{
+    text-align: center;
+    color: var(--main-color);
+    font-size: 40px;
+    background-color: var(--other-color);
+    width: 460px;
+    border-radius: 20px;
+    box-shadow: black 0px 1px 15px;
+    margin-bottom: -30px;
+    margin-left: 570px;
+    margin-top: 120px;
+}

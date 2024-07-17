@@ -12,15 +12,12 @@ class Booking extends Model
     protected $primaryKey = 'booking_ID';
 
     protected $fillable = [
-        'start_Date', 
-        'end_Date', 
-        'time_from', 
-        'time_to',
-        'location', 
-        'total_price', 
-        'booking_status', 
-        'cust_ID', 
-        'package_ID'
+        'total_Price',
+        'booking_Status',
+        'custom_Status',
+        'cust_ID',
+        'package_ID',
+        'package_detail_ID',
     ];
 
     public function customer()

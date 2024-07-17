@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Booking;
+use App\Models\PackageDetail;
 use App\Models\Picture;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class BookingController extends Controller
 {
@@ -58,12 +62,29 @@ class BookingController extends Controller
         $packages = $query->get();
 
         return view('cust.listBooking', compact('packages'));
-    }
+     }
     
-    public function showBookingPage($packageId)
+        public function showBookingPage($packageId)
+        {
+            $package = Package::findOrFail($packageId);
+        
+            $pictures = [];
+            $videos = [];
+        
+            if ($package->service_Type == 'Photographer') {
+                $pictures = Picture::where('staff_ID', $package->staff_ID)->get();
+            } elseif ($package->service_Type == 'Videographer') {
+                $videos = Video::where('staff_ID', $package->staff_ID)->get();
+            }
+        
+            return view('cust.booking', compact('package', 'pictures', 'videos'));
+        }
+
+
+
+    public function showCustomizeForm($packageId)
     {
         $package = Package::findOrFail($packageId);
-        return view('cust.booking', compact('package'));
+        return view('cust.custom', compact('package'));
     }
 }
-

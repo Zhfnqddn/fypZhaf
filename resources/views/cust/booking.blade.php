@@ -15,7 +15,7 @@
 <body>
     <!---header--->
     <header>
-        <a href="{{ route('dashboard') }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
+        <a href="{{ route('dashboard') }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
         <ul class="navlist">
             <li><a href="{{ (route('dashboard')) }}">HOME</a></li>
             <div class="dropdown">
@@ -51,14 +51,24 @@
         <h2>BOOKING</h2>
         </div>
         <section class="container">
-            <div class="image-gallery-container">
-                <div class="image-gallery">
-                    <img src="img/nf.jpg" alt="NishFoto" width="150px" height="150px">
-                    <img src="img/nf.jpg" alt="NishFoto" width="150px" height="150px">
-                    <img src="img/nf.jpg" alt="NishFoto" width="150px" height="150px">
-                    <img src="img/nf.jpg" alt="NishFoto" width="150px" height="150px">
-                </div>
-            </div>
+        <div class="image-gallery-container">
+    <div class="image-gallery">
+        @if ($package->service_Type == 'Photographer' && $pictures->count() > 0)
+            @foreach ($pictures as $picture)
+                <img src="{{ asset('storage/' . $picture->picture_FilePath) }}" alt="{{ $picture->picture_Name }}" width="150px" height="150px">
+            @endforeach
+        @elseif ($package->service_Type == 'Videographer' && $videos->count() > 0)
+            @foreach ($videos as $video)
+                <video width="150px" height="150px" controls>
+                    <source src="{{ asset('storage/' . $video->video_FilePath) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            @endforeach
+        @else
+            <p>No media available.</p>
+        @endif
+    </div>
+</div>
             <div class="info-container">
             <div class="info">
                 <div class="info-item">
@@ -102,7 +112,9 @@
                 </div>
     
                 <div class="button-group">
-                    <button class="custom-package">Custom Package</button>
+                    <form action="{{ route('customizePackageForm', ['packageId' => $package->package_ID]) }}" method="GET">
+                        <button type="submit" class="custom-package">Custom Package</button>
+                    </form>
                     <button id="goToPage" class="book-button">Book</button>
                 </div>
             </div>
