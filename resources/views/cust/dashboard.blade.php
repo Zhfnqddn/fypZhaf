@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<div class="dropdown">
-				<a href="#" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
+				<a href="{{ (route('customer.customizations')) }}" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
 					<a href="#">STATUS</a>
 				</div>

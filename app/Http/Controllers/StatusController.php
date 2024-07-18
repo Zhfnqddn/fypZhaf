@@ -110,5 +110,17 @@ class StatusController extends Controller
 
      //CUSTOMER VIEW STATUS CUSTOM
      
+     public function showCustomerCustomizations()
+     {
+         $customerId = Auth::guard('customer')->user()->cust_ID;
+         $customizations = PackageDetail::with(['package', 'booking'])
+             ->whereHas('booking', function($query) use ($customerId) {
+                 $query->where('cust_ID', $customerId);
+             })
+             ->get();
 
+
+         
+         return view('cust.statusCustom', compact('customizations'));
+     }
 }

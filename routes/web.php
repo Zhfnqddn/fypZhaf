@@ -96,3 +96,5 @@ Route::group(['middleware' => ['auth:staff']], function () {
 Route::get('/customer/bookings', [StatusController::class, 'showCustomerBookings'])->name('customer.bookings');
 Route::post('/customer/bookings/{bookingId}/cancel', [StatusController::class, 'cancelBooking'])->name('customer.cancelBooking');
 Route::post('/customer/bookings/{bookingId}/payment', [StatusController::class, 'makePayment'])->name('customer.makePayment');
+
+Route::get('/customer/customizations', [StatusController::class, 'showCustomerCustomizations'])->name('customer.customizations');

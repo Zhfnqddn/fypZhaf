@@ -20,6 +20,12 @@ class PackageDetail extends Model
         'status'
     ];
 
+    protected $casts = [
+        'addOn' => 'array',
+        'addSession' => 'array',
+        'addLocation' => 'array',
+    ];
+
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'cust_ID');
@@ -28,5 +34,11 @@ class PackageDetail extends Model
     public function package()
     {
         return $this->belongsTo(Package::class, 'package_ID');
+    }
+
+    // Define the relationship with Booking
+    public function booking()
+    {
+        return $this->hasOne(Booking::class, 'package_detail_ID');
     }
 }

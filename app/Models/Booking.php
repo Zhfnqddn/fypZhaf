@@ -34,4 +34,10 @@ class Booking extends Model
     {
         return $this->hasMany(Payment::class, 'booking_ID');
     }
+
+    // Define the relationship with PackageDetail
+    public function packageDetails()
+    {
+        return $this->hasMany(PackageDetail::class, 'booking_id', 'booking_ID');
+    }
 }
