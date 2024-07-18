@@ -36,7 +36,7 @@
 				<div class="dropdown-content-New">
 					<a href="{{ route('events.index') }}">EVENTS</a>
 					<a href="{{ route('bookings') }}">BOOKING</a>
-					<a href="#">CUSTOM</a>
+					<a href="{{ route('customizations') }}">CUSTOM</a>
 					<a href="#">PAYMENT</a>
 				</div>
 			</div>

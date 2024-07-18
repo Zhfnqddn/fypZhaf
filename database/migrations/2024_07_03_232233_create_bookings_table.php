@@ -17,7 +17,7 @@ class CreateBookingsTable extends Migration
             $table->id('booking_ID');
             $table->decimal('total_Price', 8, 2);
             $table->string('booking_Status');
-            $table->string('custom_Status');
+            $table->string('custom_Status')->default('Not Customized');
             $table->unsignedBigInteger('cust_ID');
             $table->unsignedBigInteger('package_ID');
             $table->unsignedBigInteger('package_detail_ID')->nullable();

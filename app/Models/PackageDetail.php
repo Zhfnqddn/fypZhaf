@@ -16,7 +16,8 @@ class PackageDetail extends Model
         'add_Ons', 
         'add_Session', 
         'add_Location', 
-        'package_ID'
+        'package_ID',
+        'status'
     ];
 
     public function customer()

@@ -69,7 +69,7 @@
         @endif
     </div>
 </div>
-            <div class="info-container">
+<div class="info-container">
             <div class="info">
                 <div class="info-item">
                     <label for="staffName"><strong>Staff Name:</strong></label>
@@ -108,27 +108,46 @@
     
                 <div class="info-item">
                     <label for="totalPrice"><strong>Total Price:</strong></label>
-                    <input type="text" id="totalPrice" name="totalPrice" value="RM{{ $package->price_range }}" readonly>
+                    <input type="text" id="totalPrice" name="totalPrice" value="RM{{ $totalPrice }}" readonly>
                 </div>
-    
+
+                @if($customizations)
+                    <div class="info-item">
+                        <label><strong>Customizations:</strong></label>
+                        @if($customizations->add_Hours)
+                            <p>Additional Hours: {{ $customizations->add_Hours }} - RM{{ $customizations->add_Hours * 50 }}</p>
+                        @endif
+                        @if($customizations->add_Ons)
+                            <p>Add-ons: {{ $customizations->add_Ons }}</p>
+                        @endif
+                        @if($customizations->add_Session)
+                            <p>Additional Sessions: {{ $customizations->add_Session }}</p>
+                        @endif
+                        @if($customizations->add_Location)
+                            <p>Additional Locations: {{ $customizations->add_Location }}</p>
+                        @endif
+                    </div>
+                @endif
+
                 <div class="button-group">
                     <form action="{{ route('customizePackageForm', ['packageId' => $package->package_ID]) }}" method="GET">
                         <button type="submit" class="custom-package">Custom Package</button>
                     </form>
                 </div>
                 <div class="button-group">
-    <form action="{{ route('bookPackage', ['packageId' => $package->package_ID]) }}" method="POST">
-        @csrf
-        <input type="hidden" name="total_Price" value="{{ $package->price_range }}">
-        <input type="hidden" name="cust_ID" value="{{ Auth::guard('customer')->user()->cust_ID }}">
-        <input type="hidden" name="package_ID" value="{{ $package->package_ID }}">
-        <input type="hidden" name="package_detail_ID" value="{{ $package->package_detail_ID ?? null }}">
-        <button type="submit" class="book-button">Book</button>
-    </form>
-</div>
+                    <form action="{{ route('bookPackage', ['packageId' => $package->package_ID]) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="total_Price" value="{{ $totalPrice }}">
+                        <input type="hidden" name="cust_ID" value="{{ Auth::guard('customer')->user()->cust_ID }}">
+                        <input type="hidden" name="package_ID" value="{{ $package->package_ID }}">
+                        <input type="hidden" name="package_detail_ID" value="{{ $customizations->package_detail_ID ?? null }}">
+                        <button type="submit" class="book-button">Book</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
+    
 
     <!-- contact -->
     <section class="contact" id="contact">

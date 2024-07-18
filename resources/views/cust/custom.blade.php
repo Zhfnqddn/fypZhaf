@@ -51,46 +51,48 @@
         <h2>CUSTOMIZE PACKAGE</h2>
         </div>
         <section class="container">
-            <div class="info-container">
-                <div class="info">
-                <form action="{{ route('customizePackage', ['packageId' => $package->package_ID]) }}" method="POST">
-                @csrf
-                <div class="info-item">
-                    <label for="addHours"><strong>Add Hours:</strong></label>
-                    <select id="addHours" name="addHours">
-                        <option value="" selected disabled>Select...</option>
-                        <option value="1">1 hour - Add price +RM50</option>
-                        <option value="2">2 hours - Add price +RM100</option>
-                        <option value="3">3 hours - Add price +RM150</option>
-                        <option value="4">4 hours - Add price +RM200</option>
-                        <option value="5">5 hours - Add price +RM250</option>
-                    </select>
-                </div>
+        <div class="info-container">
+            <div class="info">
+                <form action="{{ route('processCustomizePackage', ['packageId' => $package->package_ID]) }}" method="POST">
+                    @csrf
+                    <div class="info-item">
+                        <label for="addHours"><strong>Add Hours:</strong></label>
+                        <select id="addHours" name="addHours">
+                            <option value="" selected disabled>Select...</option>
+                            <option value="1">1 hour - Add price +RM50</option>
+                            <option value="2">2 hours - Add price +RM100</option>
+                            <option value="3">3 hours - Add price +RM150</option>
+                            <option value="4">4 hours - Add price +RM200</option>
+                            <option value="5">5 hours - Add price +RM250</option>
+                        </select>
+                    </div>
 
-                <div class="info-item">
-                    <label><strong>Add On:</strong></label>
-                    <label><input type="checkbox" name="addOn[]" value="Printing"> Printing - Add price +RM50</label>
-                    <label><input type="checkbox" name="addOn[]" value="Editing"> Editing - Add price +RM250</label>
-                </div>
+                    <div class="info-item">
+                        <label><strong>Add On:</strong></label>
+                        <label><input type="checkbox" name="addOn[]" value="Printing"> Printing - Add price +RM50</label>
+                        <label><input type="checkbox" name="addOn[]" value="Editing"> Editing - Add price +RM250</label>
+                    </div>
 
-                <div class="info-item">
-                    <label><strong>Add Session:</strong></label>
-                    <label><input type="checkbox" name="addSession[]" value="Indoor"> Indoor - Add price +RM50</label>
-                    <label><input type="checkbox" name="addSession[]" value="Outdoor"> Outdoor - Add price +RM150</label>
-                </div>
+                    <div class="info-item">
+                        <label><strong>Add Session:</strong></label>
+                        <label><input type="checkbox" name="addSession[]" value="Indoor"> Indoor - Add price +RM50</label>
+                        <label><input type="checkbox" name="addSession[]" value="Outdoor"> Outdoor - Add price +RM150</label>
+                    </div>
 
-                <div class="info-item">
-                    <label><strong>Add Location:</strong></label>
-                    <label><input type="checkbox" name="addLocation[]" value="Studio"> Studio - Add price +RM200</label>
-                    <label><input type="checkbox" name="addLocation[]" value="CustomerVenue"> Customer Venue - Add price +RM250</label>
-                </div>
+                    <div class="info-item">
+                        <label><strong>Add Location:</strong></label>
+                        <label><input type="checkbox" name="addLocation[]" value="Studio"> Studio - Add price +RM200</label>
+                        <label><input type="checkbox" name="addLocation[]" value="CustomerVenue"> Customer Venue - Add price +RM250</label>
+                    </div>
 
-                <div class="button-group">
-                    <button type="button" class="cancel-button">Cancel</button>
-                    <button type="submit" class="confirm-button">Confirm</button>
-                </div>
+                    <div class="button-group">
+                        <button type="button" class="cancel-button">Cancel</button>
+                        <button type="submit" class="confirm-button">Confirm</button>
+                    </div>
                 </form>
-        </section>
+            </div>
+        </div>
+    </section>
     <!-- contact -->
     <section class="contact" id="contact">
         <div class="contact-text">

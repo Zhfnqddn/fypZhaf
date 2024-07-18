@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Package;
+use App\Models\PackageDetail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+//STAFF ACCEPT OR REJECT CUSTOMER BOOKING
 class StatusController extends Controller
 {
     public function showBookings()
@@ -65,4 +67,48 @@ class StatusController extends Controller
 
         return redirect()->route('customer.bookings')->with('success', 'Payment made successfully.');
     }
+
+    //STAFF ACCEPT OR REJECT CUSTOMIZATION
+
+    public function showCustomizations()
+    {
+        $customizations = PackageDetail::with('customer', 'package')->get();
+        return view('staff.accRejCustom', compact('customizations'));
+    }
+
+    public function acceptCustomization($customizationId)
+    {
+        $customization = PackageDetail::findOrFail($customizationId);
+        $customization->status = 'Accepted';
+        $customization->save();
+    
+        // Update the booking custom status
+        $booking = Booking::where('package_detail_ID', $customizationId)->first();
+        if ($booking) {
+            $booking->custom_Status = 'Accepted';
+            $booking->save();
+        }
+    
+        return redirect()->route('customizations')->with('success', 'Customization accepted successfully.');
+    }
+    
+    public function rejectCustomization($customizationId)
+    {
+        $customization = PackageDetail::findOrFail($customizationId);
+        $customization->status = 'Rejected';
+        $customization->save();
+    
+        // Update the booking custom status
+        $booking = Booking::where('package_detail_ID', $customizationId)->first();
+        if ($booking) {
+            $booking->custom_Status = 'Rejected';
+            $booking->save();
+        }
+    
+        return redirect()->route('customizations')->with('success', 'Customization rejected successfully.');
+    }
+
+     //CUSTOMER VIEW STATUS CUSTOM
+     
+
 }

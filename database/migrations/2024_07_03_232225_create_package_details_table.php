@@ -15,10 +15,11 @@ class CreatePackageDetailsTable extends Migration
     {
         Schema::create('package_details', function (Blueprint $table) {
             $table->id('package_detail_ID');
-            $table->integer('add_Hours');
-            $table->string('add_Ons');
-            $table->string('add_Session');
-            $table->string('add_Location');
+            $table->integer('add_Hours')->default(0);
+            $table->string('add_Ons')->nullable();
+            $table->string('add_Session')->nullable();
+            $table->string('add_Location')->nullable();
+            $table->string('status')->default('Pending');
             $table->unsignedBigInteger('cust_ID');
             $table->unsignedBigInteger('package_ID');
             $table->timestamps();

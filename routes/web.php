@@ -65,6 +65,10 @@ Route::post('/customize-package/{packageId}', [BookingController::class, 'custom
 Route::get('/customize-package-form/{packageId}', [BookingController::class, 'showCustomizeForm'])->name('customizePackageForm');
 
 Route::middleware('auth:customer')->group(function () {
+Route::post('/process-customize-package/{packageId}', [BookingController::class, 'processCustomizePackage'])->name('processCustomizePackage');
+});
+
+Route::middleware('auth:customer')->group(function () {
     Route::post('/book-package/{packageId}', [BookingController::class, 'storeBooking'])->name('bookPackage');
 });
 
@@ -82,6 +86,12 @@ Route::group(['middleware' => ['auth:staff']], function () {
 Route::get('/accept-booking/{bookingId}', [StatusController::class, 'acceptBooking'])->name('accept-booking');
 Route::get('/reject-booking/{bookingId}', [StatusController::class, 'rejectBooking'])->name('reject-booking');
 Route::get('/bookings', [StatusController::class, 'showBookings'])->name('bookings');
+
+Route::group(['middleware' => ['auth:staff']], function () {
+    Route::get('/customizations', [StatusController::class, 'showCustomizations'])->name('customizations');
+    Route::get('/accept-customization/{customizationId}', [StatusController::class, 'acceptCustomization'])->name('accept-customization');
+    Route::get('/reject-customization/{customizationId}', [StatusController::class, 'rejectCustomization'])->name('reject-customization');
+});
 
 Route::get('/customer/bookings', [StatusController::class, 'showCustomerBookings'])->name('customer.bookings');
 Route::post('/customer/bookings/{bookingId}/cancel', [StatusController::class, 'cancelBooking'])->name('customer.cancelBooking');
