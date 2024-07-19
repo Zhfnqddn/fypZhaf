@@ -332,29 +332,30 @@
                         <td>{{ $booking->package->service_Type }}</td>
                         <td>RM{{ $booking->total_Price }}</td>
                         <td>{{ $booking->booking_Status }}</td>
-                        <td>
-                            @if ($booking->booking_Status == 'Pending')
-                                <form action="{{ route('customer.cancelBooking', $booking->booking_ID) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-secondary btn-sm">CANCEL BOOKING</button>
-                                </form>
-                                <form action="{{ route('customer.makePayment', $booking->booking_ID) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">MAKE PAYMENT</button>
-                                </form>
-                            @elseif ($booking->booking_Status == 'Accepted')
-                                <form action="{{ route('customer.cancelBooking', $booking->booking_ID) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-secondary btn-sm">CANCEL BOOKING</button>
-                                </form>
-                                <form action="{{ route('customer.makePayment', $booking->booking_ID) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">MAKE PAYMENT</button>
-                                </form>
-                            @else
-                                <span>No actions available</span>
-                            @endif
-                        </td>
+<td>
+    @if ($booking->booking_Status == 'Pending')
+        <form action="{{ route('customer.cancelBooking', $booking->booking_ID) }}" method="POST" style="display:inline;">
+            @csrf
+            <button type="submit" class="btn btn-secondary btn-sm">CANCEL BOOKING</button>
+        </form>
+        <form action="{{ route('toyyibpay-create', ['bookingId' => $booking->booking_ID]) }}" method="GET" style="display:inline;">
+            @csrf
+            <button type="submit" class="btn btn-primary btn-sm">MAKE PAYMENT</button>
+        </form>
+    @elseif ($booking->booking_Status == 'Accepted')
+        <form action="{{ route('customer.cancelBooking', $booking->booking_ID) }}" method="POST" style="display:inline;">
+            @csrf
+            <button type="submit" class="btn btn-secondary btn-sm">CANCEL BOOKING</button>
+        </form>
+        <form action="{{ route('toyyibpay-create', ['bookingId' => $booking->booking_ID]) }}" method="GET" style="display:inline;">
+            @csrf
+            <button type="submit" class="btn btn-primary btn-sm">MAKE PAYMENT</button>
+        </form>
+    @else
+        <span>No actions available</span>
+    @endif
+</td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -450,6 +451,14 @@
         $(document).ready(function() {
             $('#table').DataTable();
         });
+
+        function confirmPayment(bookingId) {
+        if (confirm("If you proceed to the payment, you can't cancel the booking anymore. Do you agree?")) {
+            document.getElementById('payment-form-' + bookingId).submit();
+        } else {
+            window.location.href = "{{ route('customer.bookings') }}";
+        }
+    }
     </script>
 </body>
 </html>

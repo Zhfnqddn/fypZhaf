@@ -57,16 +57,6 @@ class StatusController extends Controller
         return redirect()->route('customer.bookings')->with('success', 'Booking cancelled successfully.');
     }
 
-    public function makePayment(Request $request, $bookingId)
-    {
-        // Handle the payment logic here
-        // For simplicity, we'll just set the booking status to 'Paid'
-        $booking = Booking::findOrFail($bookingId);
-        $booking->booking_Status = 'Paid';
-        $booking->save();
-
-        return redirect()->route('customer.bookings')->with('success', 'Payment made successfully.');
-    }
 
     //STAFF ACCEPT OR REJECT CUSTOMIZATION
 
@@ -123,4 +113,12 @@ class StatusController extends Controller
          
          return view('cust.statusCustom', compact('customizations'));
      }
+
+     public function makePayment($bookingId)
+    {
+        $booking = Booking::findOrFail($bookingId);
+
+        // Redirect to Toyyibpay payment page
+        return redirect()->route('toyyibpay-create', ['bookingId' => $bookingId]);
+    }
 }

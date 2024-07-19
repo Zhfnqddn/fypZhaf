@@ -32,14 +32,13 @@
 				<a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
 					<a href="{{ (route('filter')) }}">EVENTS</a>
-					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>
-					<a href="#">PAYMENT</a>
+					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>customer-bookings
 				</div>
 			</div>
 			<div class="dropdown">
-				<a href="#" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
+				<a href="{{ (route('customer.customizations')) }}" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="{{ (route('customer.customizations')) }}">STATUS</a>
+					<a href="#">STATUS</a>
 				</div>
 			</div>
 	</ul>
@@ -47,7 +46,7 @@
 	
 	<div class="nav">
 	<div class="dropdown">
-    <a href="#" class="hi">Hi {{ $user->name }} <i class="bx bx-chevron-down"></i></a>
+	<a href="#" class="hi">Hi {{ Auth::guard('customer')->user()->name }} <i class="bx bx-chevron-down"></i></a>
     <div class="dropdown-content">
 	<a href="{{ route('viewCust') }}">View Profile</a>
 	<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -62,41 +61,7 @@
     </header>
 
 	<!--HOME-->
-	<section class="home" id="home">
-		<div class="home-text">
-			<h1>“WHEN I HAVE A <span>CAMERA</span> IN MY HAND, I KNOW<br> <span>NO FEAR</span>"</h1>
-			<a href="date.html" class="btn">BOOK NOW</a>
-		</div>
-		<div class="home-img">
-			<img src="img/sony.png" alt="">
-		</div>
-	</section>
 
-	<section class="container">
-		<div class="container-box">
-			<img src="img/p1.png">
-			<h1>PHOTOGRAPHY</h1>
-			<br>
-			<h4>Photography is the art, application, and practice of creating images by recording light, 
-				either electronically by means of an image sensor, or chemically by means of a light-sensitive 
-				material such as photographic film. It is employed in many fields of science, manufacturing 
-				(e.g., photolithography), and business, as well as its more direct uses for art, film and 
-				video production, recreational purposes, hobby, and mass communication.</h4>
-		</div>
-
-		<div class="container-box">
-			<img src="img/p2.png">
-			<h1>VIDEOGRAPHY</h1>
-			<br>
-			<h4>Videography is the process of capturing moving images on electronic media (e.g., videotape, 
-				direct to disk recording, or solid state storage) and even streaming media. The term includes 
-				methods of video production and post-production. It used to be considered the video equivalent 
-				of cinematography (moving images recorded on film stock), but the advent of digital video recording 
-				in the late 20th century blurred the distinction between the two, as in both methods the intermediary 
-				mechanism became the same. Nowadays, any video work could be called videography, whereas commercial 
-				motion picture production would be called cinematography.</h4>
-		</div>
-	</section>
 
 	<!-- contact -->
 

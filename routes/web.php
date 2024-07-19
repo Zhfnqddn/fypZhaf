@@ -14,6 +14,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ToyyibpayController;
 
 
 Route::get('/', [DashboardController::class, 'home'])->name('home');
@@ -98,3 +100,13 @@ Route::post('/customer/bookings/{bookingId}/cancel', [StatusController::class, '
 Route::post('/customer/bookings/{bookingId}/payment', [StatusController::class, 'makePayment'])->name('customer.makePayment');
 
 Route::get('/customer/customizations', [StatusController::class, 'showCustomerCustomizations'])->name('customer.customizations');
+
+Route::get('/payment', [PaymentController::class, 'payment'])->name('cust.payment');
+
+Route::get(uri:'toyyibpay', action: 'ToyyibpayController@createBill')->name(name: 'toyyibpay-create');
+Route::get(uri:'status', action: 'ToyyibpayController@paymentStatus')->name(name: 'toyyibpay-status');
+Route::get(uri:'toyyibpay-callback', action: 'ToyyibpayController@callback')->name(name: 'toyyibpay-callback');
+
+Route::get('toyyibpay/{bookingId}', [ToyyibpayController::class, 'createBill'])->name('toyyibpay-create');
+Route::get('status/{bookingId}', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status');
+Route::post('toyyibpay-callback', [ToyyibpayController::class, 'callback'])->name('toyyibpay-callback');
