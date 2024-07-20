@@ -15,7 +15,7 @@
 <body>
     <!---header--->
     <header>
-        <a href="{{ (route('dashboard')) }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
+        <a href="{{ (route('dashboard')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
         <ul class="navlist">
             <li><a href="{{ (route('dashboard')) }}">HOME</a></li>
             <div class="dropdown">
@@ -66,46 +66,34 @@
                             <option value="5">5 hours - Add price +RM250</option>
                         </select>
                     </div>
-
+                    <br>
                     <div class="info-item">
                         <label><strong>Add On:</strong></label>
-                        <label><input type="checkbox" name="addOn[]" value="Printing"> Printing - Add price +RM50</label>
-                        <label><input type="checkbox" name="addOn[]" value="Editing"> Editing - Add price +RM250</label>
+                        <label><input type="checkbox" name="addOn[]" value="Printing"> Printing (+RM50)</label>
+                        <label><input type="checkbox" name="addOn[]" value="Editing"> Editing (+RM250)</label>
                     </div>
-
+                    <br>
                     <div class="info-item">
                         <label><strong>Add Session:</strong></label>
-                        <label><input type="checkbox" name="addSession[]" value="Indoor"> Indoor - Add price +RM50</label>
-                        <label><input type="checkbox" name="addSession[]" value="Outdoor"> Outdoor - Add price +RM150</label>
+                        <label><input type="checkbox" name="addSession[]" value="Indoor"> Indoor (+RM50)</label>
+                        <label><input type="checkbox" name="addSession[]" value="Outdoor"> Outdoor (+RM150)</label>
                     </div>
-
+                    <br>
                     <div class="info-item">
                         <label><strong>Add Location:</strong></label>
-                        <label><input type="checkbox" name="addLocation[]" value="Studio"> Studio - Add price +RM200</label>
-                        <label><input type="checkbox" name="addLocation[]" value="CustomerVenue"> Customer Venue - Add price +RM250</label>
+                        <label><input type="checkbox" name="addLocation[]" value="Studio"> Studio (+RM200)</label>
+                        <label><input type="checkbox" name="addLocation[]" value="CustomerVenue"> Customer Venue (+RM250)</label>
                     </div>
-
+                    <br>
                     <div class="button-group">
                         <button type="button" class="cancel-button">Cancel</button>
-                        <button type="submit" class="confirm-button">Confirm</button>
+                        <button type="submit" class="confirm-button" onclick="return myFunction()">Confirm</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    <!-- contact -->
-    <section class="contact" id="contact">
-        <div class="contact-text">
-            <h2>CONTACT US</h2>
-            <p>“The best images are the ones that retain their strength and impact over the years, regardless of <br> the number of times they are viewed.” <br>- Anne Geddes -</p>
-            <div class="social">
-                <a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-                <a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-            </div>            
-        </div>
-    </section>
+
     <!--- scroll top --->
     <a href="#" class="scroll">
         <i class='bx bxs-up-arrow-square'></i>
@@ -184,10 +172,9 @@
             priceRangeValue.textContent = priceRange.value;
         });
 
-        // Add event listener for the book button
-        document.getElementById('goToPage').addEventListener('click', function() {
-            window.location.href = 'booking3.html';
-        });
+        function myFunction() {
+            return confirm("Are you sure you want to custom the package?");
+        }
     </script>
 </body>
 </html>

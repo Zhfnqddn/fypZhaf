@@ -31,7 +31,7 @@ class ToyyibpayController extends Controller
             'billPhone' => $customer->cust_PhoneNum,
             'billSplitPayment' => 0,
             'billSplitPaymentArgs' => '',
-            'billPaymentChannel' => 2, // 2 for both FPX and credit/debit card payments
+            'billPaymentChannel' => 0, // 2 for both FPX and credit/debit card payments
             'billContentEmail' => 'Thank you for your payment!',
             'billChargeToCustomer' => 2, // Charge to customer for both FPX and credit card
             'billExpiryDate' => now()->addDays(3)->format('d-m-Y H:i:s'),

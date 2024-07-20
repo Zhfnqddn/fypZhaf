@@ -17,21 +17,22 @@
     <header>
         <a href="{{ route('dashboard') }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
         <ul class="navlist">
-            <li><a href="{{ (route('dashboard')) }}">HOME</a></li>
-            <div class="dropdown">
-                <a href="#" class="hi & active">BOOKING<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="#">EVENTS</a>
-                    <a href="#">VIEW BOOKING</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="#">STATUS</a>
-                </div>
-            </div>
-        </ul>
+		<li><a href="{{ (route('dashboard')) }}">HOME</a></li>
+			<div class="dropdown">
+				<a href="#" class="hi & active">BOOKING<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ (route('filter')) }}">EVENTS</a>
+					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="#" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ (route('customer.customizations')) }}">STATUS</a>
+				</div>
+			</div>
+	</ul>
+    
         <div class="nav">
             <div class="dropdown">
                 <a href="#" class="hi">Hi Zhafri <i class="bx bx-chevron-down"></i></a>
@@ -112,56 +113,53 @@
                 </div>
 
                 @if($customizations)
-                    <div class="info-item">
-                        <label><strong>Customizations:</strong></label>
-                        @if($customizations->add_Hours)
-                            <p>Additional Hours: {{ $customizations->add_Hours }} - RM{{ $customizations->add_Hours * 50 }}</p>
-                        @endif
-                        @if($customizations->add_Ons)
-                            <p>Add-ons: {{ $customizations->add_Ons }}</p>
-                        @endif
-                        @if($customizations->add_Session)
-                            <p>Additional Sessions: {{ $customizations->add_Session }}</p>
-                        @endif
-                        @if($customizations->add_Location)
-                            <p>Additional Locations: {{ $customizations->add_Location }}</p>
-                        @endif
-                    </div>
-                @endif
+                <div class="info-item">
+                    <label><strong>Customizations:</strong></label>
+                    @if($customizations->add_Hours)
+                        <div class="info-item">
+                            <label for="addHours"><strong>Additional Hours:</strong></label>
+                            <input type="text" id="addHours" name="addHours" value="{{ $customizations->add_Hours }} - RM{{ $customizations->add_Hours * 50 }}" readonly>
+                        </div>
+                    @endif
+                    @if($customizations->add_Ons)
+                        <div class="info-item">
+                            <label for="addOns"><strong>Add-ons:</strong></label>
+                            <input type="text" id="addOns" name="addOns" value="{{ $customizations->add_Ons }}" readonly>
+                        </div>
+                    @endif
+                    @if($customizations->add_Session)
+                        <div class="info-item">
+                            <label for="addSession"><strong>Additional Sessions:</strong></label>
+                            <input type="text" id="addSession" name="addSession" value="{{ $customizations->add_Session }}" readonly>
+                        </div>
+                    @endif
+                    @if($customizations->add_Location)
+                        <div class="info-item">
+                            <label for="addLocation"><strong>Additional Locations:</strong></label>
+                            <input type="text" id="addLocation" name="addLocation" value="{{ $customizations->add_Location }}" readonly>
+                        </div>
+                    @endif
+                </div>
+            @endif
 
                 <div class="button-group">
                     <form action="{{ route('customizePackageForm', ['packageId' => $package->package_ID]) }}" method="GET">
                         <button type="submit" class="custom-package">Custom Package</button>
                     </form>
-                </div>
-                <div class="button-group">
                     <form action="{{ route('bookPackage', ['packageId' => $package->package_ID]) }}" method="POST">
                         @csrf
                         <input type="hidden" name="total_Price" value="{{ $totalPrice }}">
                         <input type="hidden" name="cust_ID" value="{{ Auth::guard('customer')->user()->cust_ID }}">
                         <input type="hidden" name="package_ID" value="{{ $package->package_ID }}">
                         <input type="hidden" name="package_detail_ID" value="{{ $customizations->package_detail_ID ?? null }}">
-                        <button type="submit" class="book-button">Book</button>
+                        <button type="submit" class="book-button" onclick="return myFunction()">Book</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </section>
-    
 
-    <!-- contact -->
-    <section class="contact" id="contact">
-        <div class="contact-text">
-            <h2>CONTACT US</h2>
-            <p>“The best images are the ones that retain their strength and impact over the years, regardless of <br> the number of times they are viewed.” <br>- Anne Geddes -</p>
-            <div class="social">
-                <a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-                <a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-            </div>            
-        </div>
-    </section>
     <!--- scroll top --->
     <a href="#" class="scroll">
         <i class='bx bxs-up-arrow-square'></i>
@@ -265,6 +263,10 @@
             alert("{{ session('error') }}");
         @endif
     });
+
+        function myFunction() {
+            return confirm("The booking is pending , thank you!");
+        }
     </script>
 </body>
 </html>

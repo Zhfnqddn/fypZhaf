@@ -67,7 +67,8 @@
             justify-content: space-between;
             background: transparent;
             padding: 30px 3%;
-            transition: all .50s ease;	
+            transition: all .50s ease;
+            font-family: 'Poppins';	
         }
 
         header a {
@@ -113,7 +114,7 @@
         }
 
         .nav a{
-            color: black;
+            color: white;
             font-size: var(--p-font);
             font-weight: 600;
             margin: 0 13px;
@@ -153,7 +154,7 @@
         }
 
         header.sticky{
-            padding: 15px 3%;
+            padding: 18px 6%;
             background: var(--second-color);
             color: #F1F1F2;
         }
@@ -270,6 +271,21 @@
             color: #8A00FF;
             background-color: #8A00FF;
         }
+
+        .scroll{
+        position: fixed;
+        bottom: 2.2rem;
+        border-top: 2rem;
+        right: 3.2rem;
+        }
+
+        .scroll i{
+            font-size: 22px;
+            color: var(--second-color);
+            background: var(--main-color);
+            padding: 10px;
+            border-radius: 2rem;
+        }
     
 </style>
 </head>
@@ -280,24 +296,23 @@
         <h3>STAFF</h3>
         
         <ul class="navlist">
-            <li><a href="{{ (route('dashboardStaff')) }}">HOME</a></li>
-                <div class="dropdown">
-                    <a href="#" class="hi & active">SERVICES<i class="bx bx-chevron-down"></i></a>
-                    <div class="dropdown-content-New">
-                        <a href="#">EVENTS</a>
-                        <a href="#">BOOKING</a>
-                        <a href="#">CUSTOM</a>
-                        <a href="#">PAYMENT</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
-                    <div class="dropdown-content-New">
-                        <a href="#">PHOTOGRAPHER</a>
-                        <a href="#">VIDEOGRAPHER</a>
-                    </div>
-                </div>
-        </ul>
+		<li><a href="{{ (route('dashboardStaff')) }}">HOME</a></li>
+			<div class="dropdown">
+				<a href="#" class="hi & active">SERVICES<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ route('events.index') }}">EVENTS</a>
+					<a href="{{ route('bookings') }}">BOOKING</a>
+					<a href="{{ route('customizations') }}">CUSTOM</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ route('staff.pictures.index') }}">PHOTOGRAPHER</a>
+					<a href="{{ route('staff.videos.index') }}">VIDEOGRAPHER</a>
+				</div>
+			</div>
+	</ul>
         
         <div class="nav">
         <div class="dropdown">
@@ -338,27 +353,15 @@
                         <td>{{ $booking->booking_ID }}</td>
                         <td>{{ $booking->booking_Status }}</td>
                         <td>
-                            <a href="{{ route('accept-booking', $booking->booking_ID) }}" class="btn btn-success btn-sm">ACCEPT</a>
-                            <a href="{{ route('reject-booking', $booking->booking_ID) }}" class="btn btn-danger btn-sm">REJECT</a>
+                            <a href="{{ route('accept-booking', $booking->booking_ID) }}" class="btn btn-success btn-sm" onclick="return myFunction()">ACCEPT</a>
+                            <a href="{{ route('reject-booking', $booking->booking_ID) }}" class="btn btn-danger btn-sm" onclick="return myFunction1()">REJECT</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </section>
-    <!-- contact -->
-    <section class="contact" id="contact">
-        <div class="contact-text">
-            <h2>CONTACT US</h2>
-            <p>“The best images are the ones that retain their strength and impact over the years, regardless of <br> the number of times they are viewed.” <br>- Anne Geddes -</p>
-            <div class="social">
-                <a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-                <a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-            </div>            
-        </div>
-    </section>
+
     <!--- scroll top --->
     <a href="#" class="scroll">
         <i class='bx bxs-up-arrow-square'></i>
@@ -436,6 +439,14 @@
         $(document).ready(function() {
             $('#table').DataTable();
         });
+
+        function myFunction() {
+            return confirm("Are you sure to accept the booking?");
+        }
+
+        function myFunction1() {
+            return confirm("Are you sure to reject the booking?");
+        }
     </script>
 </body>
 </html>

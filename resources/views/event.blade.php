@@ -171,7 +171,7 @@
         }
 
         .nav a{
-            color: black;
+            color: white;
             font-size: var(--p-font);
             font-weight: 600;
             margin: 0 13px;
@@ -309,17 +309,16 @@
 			<div class="dropdown">
 				<a href="#" class="hi & active">SERVICES<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="{{ (route('events.index')) }}">EVENTS</a>
-					<a href="#">BOOKING</a>
-					<a href="#">CUSTOM</a>
-					<a href="#">PAYMENT</a>
+					<a href="{{ route('events.index') }}">EVENTS</a>
+					<a href="{{ route('bookings') }}">BOOKING</a>
+					<a href="{{ route('customizations') }}">CUSTOM</a>
 				</div>
 			</div>
 			<div class="dropdown">
 				<a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="#">PHOTOGRAPHER</a>
-					<a href="#">VIDEOGRAPHER</a>
+					<a href="{{ route('staff.pictures.index') }}">PHOTOGRAPHER</a>
+					<a href="{{ route('staff.videos.index') }}">VIDEOGRAPHER</a>
 				</div>
 			</div>
 	</ul>

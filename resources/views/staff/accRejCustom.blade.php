@@ -67,7 +67,8 @@
             justify-content: space-between;
             background: transparent;
             padding: 30px 3%;
-            transition: all .50s ease;	
+            transition: all .50s ease;
+            font-family: 'Poppins';		
         }
 
         header a {
@@ -113,7 +114,7 @@
         }
 
         .nav a{
-            color: black;
+            color: white;
             font-size: var(--p-font);
             font-weight: 600;
             margin: 0 13px;
@@ -225,7 +226,7 @@
         border-radius: 20px;
         box-shadow: black 0px 1px 15px;
         margin-bottom: -30px;
-        margin-left: 570px;
+        margin-left: 510px;
         margin-top: 120px;
         }
 
@@ -280,24 +281,23 @@
         <h3>STAFF</h3>
         
         <ul class="navlist">
-            <li><a href="{{ (route('dashboardStaff')) }}">HOME</a></li>
-                <div class="dropdown">
-                    <a href="#" class="hi & active">SERVICES<i class="bx bx-chevron-down"></i></a>
-                    <div class="dropdown-content-New">
-                        <a href="#">EVENTS</a>
-                        <a href="#">BOOKING</a>
-                        <a href="#">CUSTOM</a>
-                        <a href="#">PAYMENT</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
-                    <div class="dropdown-content-New">
-                        <a href="#">PHOTOGRAPHER</a>
-                        <a href="#">VIDEOGRAPHER</a>
-                    </div>
-                </div>
-        </ul>
+		<li><a href="{{ (route('dashboardStaff')) }}">HOME</a></li>
+			<div class="dropdown">
+				<a href="#" class="hi & active">SERVICES<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ route('events.index') }}">EVENTS</a>
+					<a href="{{ route('bookings') }}">BOOKING</a>
+					<a href="{{ route('customizations') }}">CUSTOM</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ route('staff.pictures.index') }}">PHOTOGRAPHER</a>
+					<a href="{{ route('staff.videos.index') }}">VIDEOGRAPHER</a>
+				</div>
+			</div>
+	</ul>
         
         <div class="nav">
         <div class="dropdown">
@@ -346,12 +346,12 @@
                             <td>
                                 <div>
                                     <a class="btn-primary btn-sm" href="{{ route('accept-customization', ['customizationId' => $customization->package_detail_ID]) }}">
-                                        <button type="button" class="btn btn-success btn-sm">
+                                        <button type="button" class="btn btn-success btn-sm" onclick="return myFunction()">
                                             ACCEPT
                                         </button>
                                     </a>
                                     <a class="btn-primary btn-sm" href="{{ route('reject-customization', ['customizationId' => $customization->package_detail_ID]) }}">
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="return myFunction1()">
                                             REJECT
                                         </button>
                                     </a>
@@ -452,6 +452,14 @@
         $(document).ready(function() {
             $('#table').DataTable();
         });
+
+        function myFunction() {
+            return confirm("Are you sure to accept the booking?");
+        }
+
+        function myFunction1() {
+            return confirm("Are you sure to reject the booking?");
+        }
     </script>
 </body>
 </html>

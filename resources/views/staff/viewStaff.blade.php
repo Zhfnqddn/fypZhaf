@@ -24,21 +24,20 @@
     <h3>STAFF</h3>
 	
 	<ul class="navlist">
-		<li><a href="{{ (route('dashboardStaff')) }}" class="active">HOME</a></li>
+		<li><a href="{{ (route('dashboardStaff')) }}">HOME</a></li>
 			<div class="dropdown">
 				<a href="#" class="hi">SERVICES<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="#">EVENTS</a>
-					<a href="#">BOOKING</a>
-					<a href="#">CUSTOM</a>
-					<a href="#">PAYMENT</a>
+					<a href="{{ route('events.index') }}">EVENTS</a>
+					<a href="{{ route('bookings') }}">BOOKING</a>
+					<a href="{{ route('customizations') }}">CUSTOM</a>
 				</div>
 			</div>
 			<div class="dropdown">
 				<a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
-					<a href="#">PHOTOGRAPHER</a>
-					<a href="#">VIDEOGRAPHER</a>
+					<a href="{{ route('staff.pictures.index') }}">PHOTOGRAPHER</a>
+					<a href="{{ route('staff.videos.index') }}">VIDEOGRAPHER</a>
 				</div>
 			</div>
 	</ul>
@@ -91,25 +90,6 @@
     </form>
 </div>
  
- <!-- contact -->
-
-<section class="contact" id="contact">
-    <div class="contact-text">
-            <h2>CONTACT US</h2>
-            <p>“The best images are the ones that retain 
-                their strength and impact over the years, 
-                regardless of <br> the number of times they are viewed.” 
-            <br>- Anne Geddes -</p>
-                <div class="social">
-                    <a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-                    <a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-                    <a href="#"><i class='bx bxl-instagram'></i></a>
-                    <a href="#"><i class='bx bxl-twitter'></i></a>
-                </div>            
-        </div>
-</section>
-
-
     <!--- scroll top --->
 <a href="#" class="scroll">
     <i class='bx bxs-up-arrow-square'></i>

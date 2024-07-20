@@ -82,7 +82,7 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <input type="tel" id="phone" name="phone" value="{{ Auth::user()->cust_PhoneNum }}" pattern="^01[0-9]{8,9}$" required><br><br> 
 
         <div class="btn-confirm">
-            <button type="submit" class="btn">SAVE</button>
+            <button type="submit" class="btn" onclick="return myFunction()">SAVE</button>
         </div>
         <div class="btn-update2">
             <a href="{{ route('viewCust') }}" class="btn2">CANCEL</a>
@@ -91,26 +91,7 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </form>
 </div>
  
- <!-- contact -->
-
-<section class="contact" id="contact">
-	<div class="contact-text">
-			<h2>CONTACT US</h2>
-			<p>“The best images are the ones that retain 
-				their strength and impact over the years, 
-				regardless of <br> the number of times they are viewed.” 
-			<br>- Anne Geddes -</p>
-				<div class="social">
-					<a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-					<a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-					<a href="#"><i class='bx bxl-instagram'></i></a>
-					<a href="#"><i class='bx bxl-twitter'></i></a>
-				</div>			
-		</div>
-</section>
-
-
-	<!--- scroll top --->
+<!--- scroll top --->
 <a href="#" class="scroll">
 	<i class='bx bxs-up-arrow-square'></i>
 </a>
@@ -194,6 +175,10 @@ sr.reveal ('.about',{delay:100});
 sr.reveal ('.contact',{delay:100});
 sr.reveal ('.scroll',{delay:100});
 sr.reveal ('.search-bar',{delay:100});
+
+function myFunction() {
+    return confirm("Are you sure you want to save the update?");
+}
 	
 </script>
     

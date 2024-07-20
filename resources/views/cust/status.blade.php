@@ -67,7 +67,8 @@
             justify-content: space-between;
             background: transparent;
             padding: 30px 3%;
-            transition: all .50s ease;	
+            transition: all .50s ease;
+            font-family: 'Poppins', 'san-serif';	
         }
 
         header a {
@@ -113,7 +114,7 @@
         }
 
         .nav a{
-            color: black;
+            color: white;
             font-size: var(--p-font);
             font-weight: 600;
             margin: 0 13px;
@@ -149,11 +150,11 @@
         }
 
         section{
-            padding: 70px 5% 40px;
+            padding: 70px 14% 60px;
         }
 
         header.sticky{
-            padding: 15px 3%;
+            padding: 18px 6%;
             background: var(--second-color);
             color: #F1F1F2;
         }
@@ -227,9 +228,10 @@
         margin-bottom: -30px;
         margin-left: 570px;
         margin-top: 120px;
+        font-family: 'Poppins', 'san-serif';
         }
 
-                /* Table Styles */
+        /* Table Styles */
         .container {
             background-color: var(--text-color);
             padding: 20px;
@@ -270,29 +272,45 @@
             color: #8A00FF;
             background-color: #8A00FF;
         }
+
+        .scroll{
+        position: fixed;
+        bottom: 2.2rem;
+        border-top: 2rem;
+        right: 3.2rem;
+        }
+
+        .scroll i{
+            font-size: 22px;
+            color: var(--second-color);
+            background: var(--main-color);
+            padding: 10px;
+            border-radius: 2rem;
+        }
     
 </style>
 </head>
 <body>
     <!---header--->
     <header>
-        <a href="{{ (route('dashboard')) }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
+        <a href="{{ (route('dashboard')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
         <ul class="navlist">
-            <li><a href="{{ (route('dashboard')) }}">HOME</a></li>
-            <div class="dropdown">
-                <a href="#" class="hi & active">BOOKING<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="#">EVENTS</a>
-                    <a href="#">VIEW BOOKING</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="#">STATUS</a>
-                </div>
-            </div>
-        </ul>
+		<li><a href="{{ (route('dashboard')) }}">HOME</a></li>
+			<div class="dropdown">
+				<a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ (route('filter')) }}">EVENTS</a>
+					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="#" class="hi & active">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ (route('customer.customizations')) }}">STATUS</a>
+				</div>
+			</div>
+	    </ul>
+
         <div class="nav">
             <div class="dropdown">
                 <a href="#" class="hi">Hi Zhafri <i class="bx bx-chevron-down"></i></a>
@@ -336,20 +354,20 @@
     @if ($booking->booking_Status == 'Pending')
         <form action="{{ route('customer.cancelBooking', $booking->booking_ID) }}" method="POST" style="display:inline;">
             @csrf
-            <button type="submit" class="btn btn-secondary btn-sm">CANCEL BOOKING</button>
+            <button type="submit" class="btn btn-secondary btn-sm" onclick="return myFunction1()">CANCEL BOOKING</button>
         </form>
         <form action="{{ route('toyyibpay-create', ['bookingId' => $booking->booking_ID]) }}" method="GET" style="display:inline;">
             @csrf
-            <button type="submit" class="btn btn-primary btn-sm">MAKE PAYMENT</button>
+            <button type="submit" class="btn btn-primary btn-sm" onclick="return myFunction()">MAKE PAYMENT</button>
         </form>
     @elseif ($booking->booking_Status == 'Accepted')
         <form action="{{ route('customer.cancelBooking', $booking->booking_ID) }}" method="POST" style="display:inline;">
             @csrf
-            <button type="submit" class="btn btn-secondary btn-sm">CANCEL BOOKING</button>
+            <button type="submit" class="btn btn-secondary btn-sm" onclick="return myFunction1()">CANCEL BOOKING</button>
         </form>
         <form action="{{ route('toyyibpay-create', ['bookingId' => $booking->booking_ID]) }}" method="GET" style="display:inline;">
             @csrf
-            <button type="submit" class="btn btn-primary btn-sm">MAKE PAYMENT</button>
+            <button type="submit" class="btn btn-primary btn-sm" onclick="return myFunction()">MAKE PAYMENT</button>
         </form>
     @else
         <span>No actions available</span>
@@ -361,19 +379,7 @@
             </tbody>
         </table>
     </section>
-    <!-- contact -->
-    <section class="contact" id="contact">
-        <div class="contact-text">
-            <h2>CONTACT US</h2>
-            <p>“The best images are the ones that retain their strength and impact over the years, regardless of <br> the number of times they are viewed.” <br>- Anne Geddes -</p>
-            <div class="social">
-                <a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-                <a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-            </div>            
-        </div>
-    </section>
+
     <!--- scroll top --->
     <a href="#" class="scroll">
         <i class='bx bxs-up-arrow-square'></i>
@@ -452,13 +458,13 @@
             $('#table').DataTable();
         });
 
-        function confirmPayment(bookingId) {
-        if (confirm("If you proceed to the payment, you can't cancel the booking anymore. Do you agree?")) {
-            document.getElementById('payment-form-' + bookingId).submit();
-        } else {
-            window.location.href = "{{ route('customer.bookings') }}";
+        function myFunction() {
+            return confirm("Once you make the payment, you can't cancel the booking. \nAre you okay with that?");
         }
-    }
+
+        function myFunction1() {
+            return confirm("Are you sure to cancel the booking?");
+        }
     </script>
 </body>
 </html>

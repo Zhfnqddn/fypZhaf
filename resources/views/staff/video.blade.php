@@ -18,24 +18,23 @@
         <a href="{{ route('dashboardStaff') }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
         <h3>STAFF</h3>
         <ul class="navlist">
-            <li><a href="{{ route('dashboardStaff') }}">HOME</a></li>
-            <div class="dropdown">
-                <a href="#" class="hi & active">SERVICES<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="#">EVENTS</a>
-                    <a href="#">BOOKING</a>
-                    <a href="#">CUSTOM</a>
-                    <a href="#">PAYMENT</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" class="hi">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="{{ route('staff.pictures.index') }}">PHOTOGRAPHER</a>
-                    <a href="{{ route('staff.videos.index') }}">VIDEOGRAPHER</a>
-                </div>
-            </div>
-        </ul>
+		<li><a href="{{ (route('dashboardStaff')) }}">HOME</a></li>
+			<div class="dropdown">
+				<a href="#" class="hi">SERVICES<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ route('events.index') }}">EVENTS</a>
+					<a href="{{ route('bookings') }}">BOOKING</a>
+					<a href="{{ route('customizations') }}">CUSTOM</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="#" class="hi & active">PORTFOLIO<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ route('staff.pictures.index') }}">PHOTOGRAPHER</a>
+					<a href="{{ route('staff.videos.index') }}">VIDEOGRAPHER</a>
+				</div>
+			</div>
+	</ul>
         <div class="nav">
             <div class="dropdown">
             <a href="#" class="hi">Hi {{ Auth::guard('staff')->user()->name }} <i class="bx bx-chevron-down"></i></a>
@@ -61,7 +60,7 @@
                     <label for="video">Video:</label>
                     <input type="file" name="video" id="video" required>
                 </div>
-                <button type="submit" class="view-button">Upload</button>
+                <button type="submit" class="view-button" onclick="return myFunction()">Upload</button>
             </form>
         </div>
     </section>
@@ -76,24 +75,12 @@
             <form action="{{ route('staff.videos.destroy', $video->video_ID) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="view-button">Delete</button>
+                <button type="submit" class="view-button" onclick="return myFunction1()">Delete</button>
             </form>
         </div>
         @endforeach
     </section>
-    <!-- contact -->
-    <section class="contact" id="contact">
-        <div class="contact-text">
-            <h2>CONTACT US</h2>
-            <p>“The best images are the ones that retain their strength and impact over the years, regardless of <br> the number of times they are viewed.” <br>- Anne Geddes -</p>
-            <div class="social">
-                <a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-                <a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-            </div>            
-        </div>
-    </section>
+
     <!--- scroll top --->
     <a href="#" class="scroll">
         <i class='bx bxs-up-arrow-square'></i>
@@ -163,6 +150,14 @@
         sr.reveal ('.contact',{delay:100});
         sr.reveal ('.scroll',{delay:100});
         sr.reveal ('.search-bar',{delay:100});
+
+        function myFunction() {
+            return confirm("Are you sure you want to upload it?");
+        }
+
+        function myFunction1() {
+            return confirm("Are you sure you want to delete it?");
+        }
     </script>
 </body>
 </html>

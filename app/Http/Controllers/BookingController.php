@@ -174,7 +174,7 @@ class BookingController extends Controller
  
              Log::info('Booking saved successfully');
  
-             return redirect()->route('dashboard')->with('success', 'Your booking is pending');
+             return redirect()->route('customer.bookings')->with('success', 'Your booking is pending');
          } catch (\Exception $e) {
              Log::error('Error saving booking: ' . $e->getMessage());
              return redirect()->back()->with('error', 'Failed to book package.');

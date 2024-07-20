@@ -7,17 +7,11 @@
     <title>Login Page</title>
 
     <link rel="stylesheet" href="{{ asset('css/login.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!---box icons--->	
-<link rel="stylesheet"
-href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" 
-rel="stylesheet">
-
-<!---google fonts--->	
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?
-family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 </head>
@@ -67,7 +61,7 @@ family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
                     </label>
                     <a href="#">Forgot password?</a>
                 </div>
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn" onclick="myFunction()">Login</button>
                 <div class="register-link">
                     <p>Don't have an account? <a href="{{ route('register') }}">Register</a></p>
                 </div>
@@ -139,6 +133,16 @@ sr.reveal ('.about-img',{delay:100});
 sr.reveal ('.about',{delay:100});
 sr.reveal ('.contact',{delay:100});
 sr.reveal ('.scroll',{delay:100});
+
+function myFunction() {
+  var txt;
+  if (confirm("Login Successfuly!")) {
+    txt = "You pressed OK!";
+  } else {
+    txt = "You pressed Cancel!";
+  }
+  document.getElementById("#").innerHTML = txt;
+}
 	
 </script>
     

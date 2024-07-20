@@ -24,7 +24,7 @@
 
     <!---header--->
     <header>
-	<a href="{{ (route('dashboard')) }}" class="logo"><img src="img/cam.png">SNAP.FIND</a> 
+	<a href="{{ (route('dashboard')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
 	
 	<ul class="navlist">
 		<li><a href="{{ (route('dashboard')) }}" class="active">HOME</a></li>
@@ -33,7 +33,6 @@
 				<div class="dropdown-content-New">
 					<a href="{{ (route('filter')) }}">EVENTS</a>
 					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>
-					<a href="#">PAYMENT</a>
 				</div>
 			</div>
 			<div class="dropdown">
@@ -97,25 +96,6 @@
 				motion picture production would be called cinematography.</h4>
 		</div>
 	</section>
-
-	<!-- contact -->
-
-<section class="contact" id="contact">
-	<div class="contact-text">
-			<h2>CONTACT US</h2>
-			<p>“The best images are the ones that retain 
-				their strength and impact over the years, 
-				regardless of <br> the number of times they are viewed.” 
-			<br>- Anne Geddes -</p>
-				<div class="social">
-					<a href="#" class="clr"><i class='bx bxl-whatsapp-square'></i></a>
-					<a href="https://www.facebook.com/p/MM-SPORT-POINT-100054418932651/"><i class='bx bxl-facebook-square'></i></a>
-					<a href="#"><i class='bx bxl-instagram'></i></a>
-					<a href="#"><i class='bx bxl-twitter'></i></a>
-				</div>			
-		</div>
-</section>
-
 
 	<!--- scroll top --->
 <a href="#" class="scroll">
