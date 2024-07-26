@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>SNAP.FIND</title>
+    <link rel="icon" href="{{ asset('img/cam.png') }}" sizes="96x96" type="image/png">
     <link rel="stylesheet" href="AccRej.css">
     <!---box icons--->    
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -44,16 +45,16 @@
         }
 
         h3{
-        color: var(--main-color);
-        margin-left: -150px;
-        margin-top: 1px;
-        font-size: var(--p-font);
-        background: var(--other-color);
-        font-weight: 500;
-        letter-spacing: 1px;
-        border-radius: 3rem;
-        box-shadow: #B026FF 0px 1px 10px;
-        padding: 4px 10px;
+            color: var(--main-color);
+            margin-left: -150px;
+            margin-top: 1px;
+            font-size: var(--p-font);
+            background: var(--other-color);
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 3rem;
+            box-shadow: #B026FF 0px 1px 10px;
+            padding: 4px 10px;
         }
 
         header{
@@ -72,7 +73,7 @@
         }
 
         header a {
-        text-decoration: none;
+            text-decoration: none;
         }
 
 
@@ -218,17 +219,17 @@
         }
 
         .font h2{
-        text-align: center;
-        color: var(--main-color);
-        font-size: 40px;
-        background-color: var(--other-color);
-        width: 520px;
-        border-radius: 20px;
-        box-shadow: black 0px 1px 15px;
-        margin-bottom: -30px;
-        margin-left: 500px;
-        margin-top: 120px;
-        font-family: 'Poppins';
+            text-align: center;
+            color: var(--main-color);
+            font-size: 40px;
+            background-color: var(--other-color);
+            width: 520px;
+            border-radius: 20px;
+            box-shadow: black 0px 1px 15px;
+            margin-bottom: -30px;
+            margin-left: 500px;
+            margin-top: 120px;
+            font-family: 'Poppins';
         }
 
                 /* Table Styles */
@@ -274,10 +275,10 @@
         }
 
         .scroll{
-        position: fixed;
-        bottom: 2.2rem;
-        border-top: 2rem;
-        right: 3.2rem;
+            position: fixed;
+            bottom: 2.2rem;
+            border-top: 2rem;
+            right: 3.2rem;
         }
 
         .scroll i{
@@ -287,6 +288,15 @@
             padding: 10px;
             border-radius: 2rem;
         }
+
+        @media (min-width: 1920px) {
+            .font h2 {
+            font-size: 30px;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
     
 </style>
 </head>
@@ -295,21 +305,22 @@
     <header>
         <a href="{{ (route('dashboard')) }}" class="logo"><img src="{{ asset('img/cam.png') }}">SNAP.FIND</a> 
         <ul class="navlist">
-            <li><a href="{{ (route('dashboard')) }}">HOME</a></li>
-            <div class="dropdown">
-                <a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="#">EVENTS</a>
-                    <a href="#">VIEW BOOKING</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" class="hi & active">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
-                <div class="dropdown-content-New">
-                    <a href="#">STATUS</a>
-                </div>
-            </div>
-        </ul>
+		<li><a href="{{ (route('dashboard')) }}">HOME</a></li>
+			<div class="dropdown">
+				<a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ (route('filter')) }}">EVENTS</a>
+					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<a href="#" class="hi & active">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
+				<div class="dropdown-content-New">
+					<a href="{{ (route('customer.customizations')) }}">STATUS</a>
+				</div>
+			</div>
+	    </ul>
+
         <div class="nav">
             <div class="dropdown">
                 <a href="#" class="hi">Hi Zhafri <i class="bx bx-chevron-down"></i></a>

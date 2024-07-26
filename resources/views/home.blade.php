@@ -4,8 +4,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-
+    <title>SNAP.FIND</title>
+    <link rel="icon" href="{{ asset('img/cam.png') }}" sizes="96x96" type="image/png">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}?v={{ time() }}">
 
 

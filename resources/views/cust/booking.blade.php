@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>SNAP.FIND</title>
+    <link rel="icon" href="{{ asset('img/cam.png') }}" sizes="96x96" type="image/png">
     <link rel="stylesheet" href="{{ asset('css/booking.css') }}?v={{ time() }}">
     <!---box icons--->    
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -53,111 +54,116 @@
         </div>
         <section class="container">
         <div class="image-gallery-container">
-    <div class="image-gallery">
-        @if ($package->service_Type == 'Photographer' && $pictures->count() > 0)
-            @foreach ($pictures as $picture)
-                <img src="{{ asset('storage/' . $picture->picture_FilePath) }}" alt="{{ $picture->picture_Name }}" width="150px" height="150px">
-            @endforeach
-        @elseif ($package->service_Type == 'Videographer' && $videos->count() > 0)
-            @foreach ($videos as $video)
-                <video width="150px" height="150px" controls>
-                    <source src="{{ asset('storage/' . $video->video_FilePath) }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            @endforeach
-        @else
-            <p>No media available.</p>
-        @endif
-    </div>
-</div>
-<div class="info-container">
-            <div class="info">
-                <div class="info-item">
-                    <label for="staffName"><strong>Staff Name:</strong></label>
-                    <input type="text" id="staffName" name="staffName" value="{{ $package->staff->name }}" readonly>
-                </div>
-    
-                <div class="info-item">
-                    <label for="packageName"><strong>Package Name:</strong></label>
-                    <input type="text" id="packageName" name="packageName" value="{{ $package->package_Name }}" readonly>
-                </div>
-    
-                <div class="info-item">
-                    <label for="startDate"><strong>Start Date:</strong></label>
-                    <input type="date" id="startDate" name="startDate" value="{{ $package->start_Date }}" readonly>
-                </div>
-    
-                <div class="info-item">
-                    <label for="endDate"><strong>End Date:</strong></label>
-                    <input type="date" id="endDate" name="endDate" value="{{ $package->end_Date }}" readonly>
-                </div>
-    
-                <div class="info-item">
-                    <label for="timeFrom"><strong>Time From:</strong></label>
-                    <input type="time" id="timeFrom" name="timeFrom" value="{{ $package->time_From }}" readonly>
-                </div>
-    
-                <div class="info-item">
-                    <label for="timeTo"><strong>Time To:</strong></label>
-                    <input type="time" id="timeTo" name="timeTo" value="{{ $package->time_To }}" readonly>
-                </div>
-    
-                <div class="info-item">
-                    <label for="location"><strong>Location:</strong></label>
-                    <input type="text" id="location" name="location" value="{{ $package->location }}" readonly>
-                </div>
-    
-                <div class="info-item">
-                    <label for="totalPrice"><strong>Total Price:</strong></label>
-                    <input type="text" id="totalPrice" name="totalPrice" value="RM{{ $totalPrice }}" readonly>
-                </div>
+            <div class="image-gallery">
+                @if ($package->service_Type == 'Photographer' && $pictures->count() > 0)
+                    @foreach ($pictures as $picture)
+                        <div class="slide">
+                            <img src="{{ asset('storage/' . $picture->picture_FilePath) }}" alt="{{ $picture->picture_Name }}">
+                        </div>
+                    @endforeach
+                @elseif ($package->service_Type == 'Videographer' && $videos->count() > 0)
+                    @foreach ($videos as $video)
+                        <div class="slide">
+                            <video autoplay loop controls>
+                                <source src="{{ asset('storage/' . $video->video_FilePath) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    @endforeach
+                @else
+                    <p>No media available.</p>
+                @endif
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div class="info-container">
+    <div class="info">
+        <div class="info-item">
+            <label for="staffName"><strong>Staff Name:</strong></label>
+            <input type="text" id="staffName" name="staffName" value="{{ $package->staff->name }}" readonly>
+        </div>
 
-                @if($customizations)
+        <div class="info-item">
+            <label for="packageName"><strong>Package Name:</strong></label>
+            <input type="text" id="packageName" name="packageName" value="{{ $package->package_Name }}" readonly>
+        </div>
+
+        <div class="info-item">
+            <label for="startDate"><strong>Start Date:</strong></label>
+            <input type="date" id="startDate" name="startDate" value="{{ $package->start_Date }}" readonly>
+        </div>
+
+        <div class="info-item">
+            <label for="endDate"><strong>End Date:</strong></label>
+            <input type="date" id="endDate" name="endDate" value="{{ $package->end_Date }}" readonly>
+        </div>
+
+        <div class="info-item">
+            <label for="timeFrom"><strong>Time From:</strong></label>
+            <input type="time" id="timeFrom" name="timeFrom" value="{{ $package->time_From }}" readonly>
+        </div>
+
+        <div class="info-item">
+            <label for="timeTo"><strong>Time To:</strong></label>
+            <input type="time" id="timeTo" name="timeTo" value="{{ $package->time_To }}" readonly>
+        </div>
+
+        <div class="info-item">
+            <label for="location"><strong>Location:</strong></label>
+            <input type="text" id="location" name="location" value="{{ $package->location }}" readonly>
+        </div>
+
+        <div class="info-item">
+            <label for="totalPrice"><strong>Total Price:</strong></label>
+            <input type="text" id="totalPrice" name="totalPrice" value="RM{{ $totalPrice }}" readonly>
+        </div>
+
+        @if($customizations)
+            @if($customizations->add_Hours)
                 <div class="info-item">
-                    <label><strong>Customizations:</strong></label>
-                    @if($customizations->add_Hours)
-                        <div class="info-item">
-                            <label for="addHours"><strong>Additional Hours:</strong></label>
-                            <input type="text" id="addHours" name="addHours" value="{{ $customizations->add_Hours }} - RM{{ $customizations->add_Hours * 50 }}" readonly>
-                        </div>
-                    @endif
-                    @if($customizations->add_Ons)
-                        <div class="info-item">
-                            <label for="addOns"><strong>Add-ons:</strong></label>
-                            <input type="text" id="addOns" name="addOns" value="{{ $customizations->add_Ons }}" readonly>
-                        </div>
-                    @endif
-                    @if($customizations->add_Session)
-                        <div class="info-item">
-                            <label for="addSession"><strong>Additional Sessions:</strong></label>
-                            <input type="text" id="addSession" name="addSession" value="{{ $customizations->add_Session }}" readonly>
-                        </div>
-                    @endif
-                    @if($customizations->add_Location)
-                        <div class="info-item">
-                            <label for="addLocation"><strong>Additional Locations:</strong></label>
-                            <input type="text" id="addLocation" name="addLocation" value="{{ $customizations->add_Location }}" readonly>
-                        </div>
-                    @endif
+                    <label for="addHours"><strong>Additional Hours:</strong></label>
+                    <input type="text" id="addHours" name="addHours" value="{{ $customizations->add_Hours }} - RM{{ $customizations->add_Hours * 50 }}" readonly>
                 </div>
             @endif
 
-                <div class="button-group">
-                    <form action="{{ route('customizePackageForm', ['packageId' => $package->package_ID]) }}" method="GET">
-                        <button type="submit" class="custom-package">Custom Package</button>
-                    </form>
-                    <form action="{{ route('bookPackage', ['packageId' => $package->package_ID]) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="total_Price" value="{{ $totalPrice }}">
-                        <input type="hidden" name="cust_ID" value="{{ Auth::guard('customer')->user()->cust_ID }}">
-                        <input type="hidden" name="package_ID" value="{{ $package->package_ID }}">
-                        <input type="hidden" name="package_detail_ID" value="{{ $customizations->package_detail_ID ?? null }}">
-                        <button type="submit" class="book-button" onclick="return myFunction()">Book</button>
-                    </form>
+            @if($customizations->add_Ons)
+                <div class="info-item">
+                    <label for="addOns"><strong>Add-ons:</strong></label>
+                    <input type="text" id="addOns" name="addOns" value="{{ $customizations->add_Ons }}" readonly>
                 </div>
+            @endif
 
-            </div>
-        </div>
+            @if($customizations->add_Session)
+                <div class="info-item">
+                    <label for="addSession"><strong>Additional Sessions:</strong></label>
+                    <input type="text" id="addSession" name="addSession" value="{{ $customizations->add_Session }}" readonly>
+                </div>
+            @endif
+
+            @if($customizations->add_Location)
+                <div class="info-item">
+                    <label for="addLocation"><strong>Additional Locations:</strong></label>
+                    <input type="text" id="addLocation" name="addLocation" value="{{ $customizations->add_Location }}" readonly>
+                </div>
+            @endif
+        @endif
+    </div>
+
+    <div class="button-group">
+        <form action="{{ route('customizePackageForm', ['packageId' => $package->package_ID]) }}" method="GET">
+            <button type="submit" class="custom-package">Custom Package</button>
+        </form>
+        <form action="{{ route('bookPackage', ['packageId' => $package->package_ID]) }}" method="POST">
+            @csrf
+            <input type="hidden" name="total_Price" value="{{ $totalPrice }}">
+            <input type="hidden" name="cust_ID" value="{{ Auth::guard('customer')->user()->cust_ID }}">
+            <input type="hidden" name="package_ID" value="{{ $package->package_ID }}">
+            <input type="hidden" name="package_detail_ID" value="{{ $customizations->package_detail_ID ?? null }}">
+            <button type="submit" class="book-button" onclick="return myFunction()">Book</button>
+        </form>
+    </div>
+</div>
     </section>
 
     <!--- scroll top --->
@@ -170,11 +176,26 @@
     <script src="home.js"></script>
 
     <script>
-                document.addEventListener('DOMContentLoaded', function() {
-            @if(session('success'))
-                alert("{{ session('success') }}");
-                window.location.href = '{{ route('dashboard') }}';
-            @endif
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manual-sliding functionality
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('.slide');
+            const showSlides = (n) => {
+                if (n >= slides.length) {
+                    slideIndex = 0;
+                }
+                if (n < 0) {
+                    slideIndex = slides.length - 1;
+                }
+                slides.forEach((slide, index) => {
+                    slide.style.display = index === slideIndex ? 'block' : 'none';
+                });
+            };
+            showSlides(slideIndex);
+
+            window.plusSlides = (n) => {
+                showSlides(slideIndex += n);
+            };
         });
 
         document.addEventListener('DOMContentLoaded', function() {

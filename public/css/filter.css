@@ -390,3 +390,22 @@ h3{
     color: var(--text-color);
     box-shadow: #B026FF 0px 1px 23px;
 }
+
+/* Responsive Styles for 23.8-inch screen */
+@media (min-width: 1920px) {
+    .font h2 {
+        font-size: 48px;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .filter-section .btn {
+		margin-left: 365px;
+		margin-right: 180px;
+        display: block;
+        width: 130px;
+        text-align: center;
+		margin-top: 40px;
+		border-radius: 4px;
+    }
+}

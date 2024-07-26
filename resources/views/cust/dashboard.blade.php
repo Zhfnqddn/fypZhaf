@@ -4,8 +4,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-
+    <title>SNAP.FIND</title>
+    <link rel="icon" href="{{ asset('img/cam.png') }}" sizes="96x96" type="image/png">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}?v={{ time() }}">
 
     <!---box icons--->	
@@ -64,7 +64,7 @@
 	<section class="home" id="home">
 		<div class="home-text">
 			<h1>“WHEN I HAVE A <span>CAMERA</span> IN MY HAND, I KNOW<br> <span>NO FEAR</span>"</h1>
-			<a href="date.html" class="btn">BOOK NOW</a>
+			<a href="{{ (route('filter')) }}" class="btn">BOOK NOW</a>
 		</div>
 		<div class="home-img">
 			<img src="img/sony.png" alt="">

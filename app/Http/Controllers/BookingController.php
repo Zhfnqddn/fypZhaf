@@ -57,6 +57,7 @@ class BookingController extends Controller
         }
 
         if ($request->filled('priceRange')) {
+            $priceRange = $request->priceRange;
             $query->where('price_range', '<=', $request->priceRange);
         }
 
@@ -180,22 +181,6 @@ class BookingController extends Controller
              return redirect()->back()->with('error', 'Failed to book package.');
          }
      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function showCustomizeForm($packageId)
     {

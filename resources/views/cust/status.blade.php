@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>SNAP.FIND</title>
+    <link rel="icon" href="{{ asset('img/cam.png') }}" sizes="96x96" type="image/png">
     <link rel="stylesheet" href="AccRej.css">
     <!---box icons--->    
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -287,6 +288,15 @@
             padding: 10px;
             border-radius: 2rem;
         }
+
+        @media (min-width: 1920px) {
+        .font h2 {
+        font-size: 40px;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+}
     
 </style>
 </head>
@@ -297,14 +307,14 @@
         <ul class="navlist">
 		<li><a href="{{ (route('dashboard')) }}">HOME</a></li>
 			<div class="dropdown">
-				<a href="#" class="hi">BOOKING<i class="bx bx-chevron-down"></i></a>
+				<a href="#" class="hi & active">BOOKING<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
 					<a href="{{ (route('filter')) }}">EVENTS</a>
 					<a href="{{ (route('customer.bookings')) }}">VIEW BOOKING</a>
 				</div>
 			</div>
 			<div class="dropdown">
-				<a href="#" class="hi & active">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
+				<a href="#" class="hi">CUSTOMIZE<i class="bx bx-chevron-down"></i></a>
 				<div class="dropdown-content-New">
 					<a href="{{ (route('customer.customizations')) }}">STATUS</a>
 				</div>
@@ -335,6 +345,7 @@
             <thead>
                 <tr>
                     <th scope="col">Booking ID</th>
+                    <th scope="col">Package Details ID</th>
                     <th scope="col">Package Name</th>
                     <th scope="col">Service Type</th>
                     <th scope="col">Total Price</th>
@@ -346,6 +357,7 @@
                 @foreach ($bookings as $booking)
                     <tr>
                         <td>{{ $booking->booking_ID }}</td>
+                        <td>{{ $booking->package_detail_ID }}</td>
                         <td>{{ $booking->package->package_Name }}</td>
                         <td>{{ $booking->package->service_Type }}</td>
                         <td>RM{{ $booking->total_Price }}</td>
