@@ -58,7 +58,7 @@
                 @if ($package->service_Type == 'Photographer' && $pictures->count() > 0)
                     @foreach ($pictures as $picture)
                         <div class="slide">
-                            <img src="{{ asset('storage/' . $picture->picture_FilePath) }}" alt="{{ $picture->picture_Name }}">
+                            <img src="{{ asset($picture->picture_FilePath) }}" alt="{{ $picture->picture_Name }}">
                         </div>
                     @endforeach
                 @elseif ($package->service_Type == 'Videographer' && $videos->count() > 0)
