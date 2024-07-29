@@ -64,7 +64,7 @@
                 @elseif ($package->service_Type == 'Videographer' && $videos->count() > 0)
                     @foreach ($videos as $video)
                         <div class="slide">
-                            <video autoplay loop controls>
+                            <video autoplay muted loop controls>
                                 <source src="{{ asset($video->video_FilePath) }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
