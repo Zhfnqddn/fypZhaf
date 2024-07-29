@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Picture;
 use App\Models\Video;
+use App\Models\Picture;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class PortfolioController extends Controller
 {
@@ -21,24 +22,30 @@ class PortfolioController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+    
         $staffId = Auth::id();
         Log::info('Authenticated Staff ID: ' . $staffId);
-
+    
         if (!$staffId) {
             return redirect()->route('staff.pictures.index')->with('error', 'User is not authenticated.');
         }
-
+    
         $file = $request->file('image');
-        $imagePath = $file->store('pictures', 'public');
+    
+        // Upload the file to Cloudinary
+        $uploadedFile = Cloudinary::upload($file->getRealPath(), [
+            'folder' => 'pictures',
+        ]);
+    
+        $uploadedFileUrl = $uploadedFile->getSecurePath(); // Retrieve the secure URL from the result
         $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-
+    
         Picture::create([
             'picture_Name' => $originalFileName,
-            'picture_FilePath' => $imagePath,
+            'picture_FilePath' => $uploadedFileUrl,
             'staff_ID' => $staffId,
         ]);
-
+    
         return redirect()->route('staff.pictures.index')->with('success', 'Picture uploaded successfully.');
     }
 
