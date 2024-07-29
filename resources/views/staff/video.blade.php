@@ -70,7 +70,7 @@
         <div class="container-box">
             <h4>{{ $video->video_Name }}</h4>
             <video width="300" height="300" controls>
-                <source src="{{ asset('storage/' . $video->video_FilePath) }}" type="video/mp4">
+                <source src="{{ asset($video->video_FilePath) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <form action="{{ route('staff.videos.destroy', $video->video_ID) }}" method="POST">
