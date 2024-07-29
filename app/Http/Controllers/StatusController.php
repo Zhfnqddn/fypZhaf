@@ -15,44 +15,27 @@ class StatusController extends Controller
 {
     public function showBookings()
     {
-        $currentUser = Auth::guard('staff')->user();
-        Log::info('Current staff user before showing bookings:', ['user' => $currentUser]);
-
-        $bookings = Booking::with('customer')->get();
-
-        Log::info('Current staff user after retrieving bookings:', ['user' => Auth::guard('staff')->user()]);
-
+        $bookings = Booking::with('customer')->get();  
         return view('staff.accRej', compact('bookings'));
     }
 
     public function acceptBooking($bookingId)
     {
-        $currentUser = Auth::guard('staff')->user();
-        Log::info('Current staff user before accepting booking:', ['user' => $currentUser]);
-
         $booking = Booking::findOrFail($bookingId);
         $booking->booking_Status = 'Accepted';
         $booking->save();
-
-        Log::info('Current staff user after accepting booking:', ['user' => Auth::guard('staff')->user()]);
 
         return redirect()->route('bookings')->with('success', 'Booking accepted successfully.');
     }
 
     public function rejectBooking($bookingId)
     {
-        $currentUser = Auth::guard('staff')->user();
-        Log::info('Current staff user before rejecting booking:', ['user' => $currentUser]);
-
         $booking = Booking::findOrFail($bookingId);
         $booking->booking_Status = 'Rejected';
         $booking->save();
 
-        Log::info('Current staff user after rejecting booking:', ['user' => Auth::guard('staff')->user()]);
-
         return redirect()->route('bookings')->with('success', 'Booking rejected successfully.');
     }
-
 
 
     //CUSTOMER VIEW STATUS BOOKING
@@ -80,16 +63,9 @@ class StatusController extends Controller
 
     public function showCustomizations()
     {
-        $currentUser = Auth::guard('staff')->user();
-        Log::info('Current staff user before showing customizations:', ['user' => $currentUser]);
-
         $customizations = PackageDetail::with('customer', 'package')->get();
-
-        Log::info('Current staff user after retrieving customizations:', ['user' => Auth::guard('staff')->user()]);
-
         return view('staff.accRejCustom', compact('customizations'));
     }
-
 
     public function acceptCustomization($customizationId)
     {
