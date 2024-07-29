@@ -14,6 +14,8 @@ class StatusController extends Controller
 {
     public function showBookings()
     {
+        $currentStaffId = Auth::id(); // Get the currently authenticated user's ID
+        \Log::info('Current Staff ID: ' . $currentStaffId); // Log the current staff ID for debugging
         $bookings = Booking::with('customer')->get();
         return view('staff.accRej', compact('bookings'));
     }
@@ -62,6 +64,8 @@ class StatusController extends Controller
 
     public function showCustomizations()
     {
+        $currentStaffId = Auth::id(); // Get the currently authenticated user's ID
+        \Log::info('Current Staff ID: ' . $currentStaffId); // Log the current staff ID for debugging
         $customizations = PackageDetail::with('customer', 'package')->get();
         return view('staff.accRejCustom', compact('customizations'));
     }
