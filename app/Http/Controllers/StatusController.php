@@ -28,18 +28,30 @@ class StatusController extends Controller
 
     public function acceptBooking($bookingId)
     {
+        // Log the current authenticated staff user
+        Log::info('Current staff user before accepting booking:', ['user' => Auth::guard('staff')->user()]);
+
         $booking = Booking::findOrFail($bookingId);
         $booking->booking_Status = 'Accepted';
         $booking->save();
+
+        // Log the current authenticated staff user again
+        Log::info('Current staff user after accepting booking:', ['user' => Auth::guard('staff')->user()]);
 
         return redirect()->route('bookings')->with('success', 'Booking accepted successfully.');
     }
 
     public function rejectBooking($bookingId)
     {
+        // Log the current authenticated staff user
+        Log::info('Current staff user before rejecting booking:', ['user' => Auth::guard('staff')->user()]);
+
         $booking = Booking::findOrFail($bookingId);
         $booking->booking_Status = 'Rejected';
         $booking->save();
+
+        // Log the current authenticated staff user again
+        Log::info('Current staff user after rejecting booking:', ['user' => Auth::guard('staff')->user()]);
 
         return redirect()->route('bookings')->with('success', 'Booking rejected successfully.');
     }
