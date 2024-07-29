@@ -65,7 +65,7 @@
                     @foreach ($videos as $video)
                         <div class="slide">
                             <video autoplay loop controls>
-                                <source src="{{ asset('storage/' . $video->video_FilePath) }}" type="video/mp4">
+                                <source src="{{ asset($video->video_FilePath) }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
