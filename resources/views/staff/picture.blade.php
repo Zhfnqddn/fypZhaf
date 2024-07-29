@@ -69,7 +69,7 @@
         @foreach ($pictures as $picture)
         <div class="container-box">
             <h4>{{ $picture->picture_Name }}</h4>
-            <img src="{{ asset('storage/' . $picture->picture_FilePath) }}" alt="{{ $picture->picture_Name }}" width="300px" height="300px">
+            <img src="{{ asset($picture->picture_FilePath) }}" alt="{{ $picture->picture_Name }}" width="300px" height="300px">
             <form action="{{ route('staff.pictures.destroy', $picture->picture_ID) }}" method="POST">
                 @csrf
                 @method('DELETE')
