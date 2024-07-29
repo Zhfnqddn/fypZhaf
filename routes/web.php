@@ -85,9 +85,11 @@ Route::group(['middleware' => ['auth:staff']], function () {
     Route::delete('videos/{video}', [PortfolioController::class, 'destroyVideo'])->name('staff.videos.destroy');
 });
 
+Route::group(['middleware' => ['auth:staff']], function () {
 Route::get('/accept-booking/{bookingId}', [StatusController::class, 'acceptBooking'])->name('accept-booking');
 Route::get('/reject-booking/{bookingId}', [StatusController::class, 'rejectBooking'])->name('reject-booking');
 Route::get('/bookings', [StatusController::class, 'showBookings'])->name('bookings');
+});
 
 Route::group(['middleware' => ['auth:staff']], function () {
     Route::get('/customizations', [StatusController::class, 'showCustomizations'])->name('customizations');
