@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Package;
-use App\Models\PackageDetail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Models\PackageDetail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 //STAFF ACCEPT OR REJECT CUSTOMER BOOKING
@@ -14,9 +15,14 @@ class StatusController extends Controller
 {
     public function showBookings()
     {
-        $currentStaffId = Auth::id(); // Get the currently authenticated user's ID
-        \Log::info('Current Staff ID: ' . $currentStaffId); // Log the current staff ID for debugging
+        // Log the current authenticated user
+        Log::info('Current user before showing bookings:', ['user' => Auth::guard('staff')->user()]);
+
         $bookings = Booking::with('customer')->get();
+        
+        // Log the current authenticated user again
+        Log::info('Current user after retrieving bookings:', ['user' => Auth::guard('staff')->user()]);
+        
         return view('staff.accRej', compact('bookings'));
     }
 
@@ -64,9 +70,13 @@ class StatusController extends Controller
 
     public function showCustomizations()
     {
-        $currentStaffId = Auth::id(); // Get the currently authenticated user's ID
-        \Log::info('Current Staff ID: ' . $currentStaffId); // Log the current staff ID for debugging
+        Log::info('Current user before showing customizations:', ['user' => Auth::guard('staff')->user()]);
+
         $customizations = PackageDetail::with('customer', 'package')->get();
+        
+        // Log the current authenticated user again
+        Log::info('Current user after retrieving customizations:', ['user' => Auth::guard('staff')->user()]);
+
         return view('staff.accRejCustom', compact('customizations'));
     }
 
