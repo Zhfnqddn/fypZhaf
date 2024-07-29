@@ -317,7 +317,7 @@
         
         <div class="nav">
         <div class="dropdown">
-        <a href="#" class="hi">Hi Aiman <i class="bx bx-chevron-down"></i></a>
+        <a href="#" class="hi">Hi {{ Auth::guard('staff')->user()->name }} <i class="bx bx-chevron-down"></i></a>
             <div class="dropdown-content">
             <a href="{{ (route('viewStaff')) }}">View Profile</a>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

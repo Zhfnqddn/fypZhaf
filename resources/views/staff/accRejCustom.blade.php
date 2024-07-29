@@ -272,6 +272,20 @@
             color: #8A00FF;
             background-color: #8A00FF;
         }
+        .scroll{
+            position: fixed;
+            bottom: 2.2rem;
+            border-top: 2rem;
+            right: 3.2rem;
+        }
+
+        .scroll i{
+            font-size: 22px;
+            color: var(--second-color);
+            background: var(--main-color);
+            padding: 10px;
+            border-radius: 2rem;
+        }
     
 </style>
 </head>
@@ -302,7 +316,7 @@
         
         <div class="nav">
         <div class="dropdown">
-        <a href="#" class="hi">Hi Aiman <i class="bx bx-chevron-down"></i></a>
+        <a href="#" class="hi">Hi {{ Auth::guard('staff')->user()->name }} <i class="bx bx-chevron-down"></i></a>
             <div class="dropdown-content">
             <a href="{{ (route('viewStaff')) }}">View Profile</a>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
