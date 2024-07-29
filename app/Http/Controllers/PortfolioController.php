@@ -22,30 +22,30 @@ class PortfolioController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
         $staffId = Auth::id();
         Log::info('Authenticated Staff ID: ' . $staffId);
-    
+
         if (!$staffId) {
             return redirect()->route('staff.pictures.index')->with('error', 'User is not authenticated.');
         }
-    
+
         $file = $request->file('image');
-    
+
         // Upload the file to Cloudinary
         $uploadedFile = Cloudinary::upload($file->getRealPath(), [
             'folder' => 'pictures',
         ]);
-    
+
         $uploadedFileUrl = $uploadedFile->getSecurePath(); // Retrieve the secure URL from the result
         $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-    
+
         Picture::create([
             'picture_Name' => $originalFileName,
             'picture_FilePath' => $uploadedFileUrl,
             'staff_ID' => $staffId,
         ]);
-    
+
         return redirect()->route('staff.pictures.index')->with('success', 'Picture uploaded successfully.');
     }
 
@@ -84,15 +84,20 @@ class PortfolioController extends Controller
         Log::info('Video file: ', ['file' => $file]);
 
         try {
-            $videoPath = $file->store('videos', 'public');
+            // Upload the video to Cloudinary
+            $uploadedFile = Cloudinary::uploadVideo($file->getRealPath(), [
+                'folder' => 'videos',
+            ]);
+
+            $uploadedFileUrl = $uploadedFile->getSecurePath(); // Retrieve the secure URL from the result
             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
-            Log::info('Video Path: ' . $videoPath);
+            Log::info('Video Path: ' . $uploadedFileUrl);
             Log::info('Original File Name: ' . $originalFileName);
 
             Video::create([
                 'video_Name' => $originalFileName,
-                'video_FilePath' => $videoPath,
+                'video_FilePath' => $uploadedFileUrl,
                 'staff_ID' => $staffId,
             ]);
 
