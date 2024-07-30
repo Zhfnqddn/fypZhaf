@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Log;
-
-use App\Http\Controllers\ConfigController;
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -116,16 +112,3 @@ Route::get(uri:'toyyibpay-callback', action: 'ToyyibpayController@callback')->na
 Route::get('toyyibpay/{bookingId}', [ToyyibpayController::class, 'createBill'])->name('toyyibpay-create');
 Route::get('status/{bookingId}', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status');
 Route::post('toyyibpay-callback', [ToyyibpayController::class, 'callback'])->name('toyyibpay-callback');
-
-
-Route::get('/check-php-config', function() {
-    Log::info('upload_max_filesize: ' . ini_get('upload_max_filesize'));
-    Log::info('post_max_size: ' . ini_get('post_max_size'));
-
-    return response()->json([
-        'upload_max_filesize' => ini_get('upload_max_filesize'),
-        'post_max_size' => ini_get('post_max_size'),
-    ]);
-});
-
-Route::get('/check-php-config', [ConfigController::class, 'checkPhpConfig']);
