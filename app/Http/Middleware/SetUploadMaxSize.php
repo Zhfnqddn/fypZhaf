@@ -8,9 +8,9 @@ class SetUploadMaxSize
 {
     public function handle($request, Closure $next)
     {
-        // Set to 100MB for testing purposes
-        ini_set('upload_max_filesize', '100M');
-        ini_set('post_max_size', '100M');
+        // Set to the environment variable value or default to 50MB
+        ini_set('upload_max_filesize', env('UPLOAD_MAX_SIZE', '50M') . 'K');
+        ini_set('post_max_size', env('UPLOAD_MAX_SIZE', '50M') . 'K');
 
         return $next($request);
     }
