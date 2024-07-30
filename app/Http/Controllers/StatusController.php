@@ -15,17 +15,10 @@ class StatusController extends Controller
 {
     public function showBookings()
     {
-        // Assuming you have a way to get the logged-in staff member's ID
-        $staffId = auth()->user()->id;
-    
-        // Filter bookings by staff_id
-        $bookings = Booking::with('customer')
-                           ->where('staff_id', $staffId)
-                           ->get();
-                           
+        $bookings = Booking::with('customer')->get();  
         return view('staff.accRej', compact('bookings'));
     }
-    
+
     public function acceptBooking($bookingId)
     {
         $booking = Booking::findOrFail($bookingId);
@@ -70,17 +63,9 @@ class StatusController extends Controller
 
     public function showCustomizations()
     {
-        // Assuming you have a way to get the logged-in staff member's ID
-        $staffId = auth()->user()->id;
-    
-        // Filter customizations by staff_id
-        $customizations = PackageDetail::with('customer', 'package')
-                                       ->where('staff_id', $staffId)
-                                       ->get();
-                                       
+        $customizations = PackageDetail::with('customer', 'package')->get();
         return view('staff.accRejCustom', compact('customizations'));
     }
-    
 
     public function acceptCustomization($customizationId)
     {
