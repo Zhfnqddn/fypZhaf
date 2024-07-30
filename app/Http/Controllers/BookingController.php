@@ -57,7 +57,6 @@ class BookingController extends Controller
         }
 
         if ($request->filled('priceRange')) {
-            $priceRange = $request->priceRange;
             $query->where('price_range', '<=', $request->priceRange);
         }
 
@@ -164,6 +163,10 @@ class BookingController extends Controller
          Log::info('Validation passed');
  
          try {
+
+            $package = Package::findOrFail($packageId);  // Find the package to get the staff_ID
+            Log::info('Package data: ', $package->toArray()); // Log package data to check if staff_ID is present    
+
              $booking = new Booking();
              $booking->total_Price = $request->input('total_Price');
              $booking->booking_Status = 'Pending';
@@ -171,8 +174,13 @@ class BookingController extends Controller
              $booking->cust_ID = $request->input('cust_ID');
              $booking->package_ID = $packageId;
              $booking->package_detail_ID = $request->input('package_detail_ID'); // This can be null
+             $booking->staff_ID = $package->staff_ID;  // Set the staff_ID from the package
+            
+             Log::info('Booking data before save: ', $booking->toArray()); // Log booking data before save
+
              $booking->save();
  
+             
              Log::info('Booking saved successfully');
  
              return redirect()->route('customer.bookings')->with('success', 'Your booking is pending');
@@ -181,6 +189,7 @@ class BookingController extends Controller
              return redirect()->back()->with('error', 'Failed to book package.');
          }
      }
+
 
     public function showCustomizeForm($packageId)
     {

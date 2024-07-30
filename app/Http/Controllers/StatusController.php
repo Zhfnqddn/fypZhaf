@@ -4,24 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Package;
+use App\Models\PackageDetail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use App\Models\PackageDetail;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 //STAFF ACCEPT OR REJECT CUSTOMER BOOKING
 class StatusController extends Controller
 {
+    // Ensure staff can only see their own bookings
     public function showBookings()
     {
-        $bookings = Booking::with('customer')->get();  
+        $staffId = Auth::guard('staff')->user()->staff_ID;  // Assuming you have a 'staff' guard
+        $bookings = Booking::with('customer')
+            ->where('staff_ID', $staffId)  // Filter by logged-in staff's ID
+            ->get();
         return view('staff.accRej', compact('bookings'));
     }
 
     public function acceptBooking($bookingId)
     {
-        $booking = Booking::findOrFail($bookingId);
+        $staffId = Auth::guard('staff')->user()->staff_ID;
+        $booking = Booking::where('booking_ID', $bookingId)
+            ->where('staff_ID', $staffId)  // Ensure the booking belongs to the logged-in staff
+            ->firstOrFail();
         $booking->booking_Status = 'Accepted';
         $booking->save();
 
@@ -30,7 +36,10 @@ class StatusController extends Controller
 
     public function rejectBooking($bookingId)
     {
-        $booking = Booking::findOrFail($bookingId);
+        $staffId = Auth::guard('staff')->user()->staff_ID;
+        $booking = Booking::where('booking_ID', $bookingId)
+            ->where('staff_ID', $staffId)  // Ensure the booking belongs to the logged-in staff
+            ->firstOrFail();
         $booking->booking_Status = 'Rejected';
         $booking->save();
 
@@ -63,39 +72,48 @@ class StatusController extends Controller
 
     public function showCustomizations()
     {
-        $customizations = PackageDetail::with('customer', 'package')->get();
+        $staffId = Auth::guard('staff')->user()->staff_ID;
+        $customizations = PackageDetail::with('customer', 'package')
+            ->whereHas('booking', function ($query) use ($staffId) {
+                $query->where('staff_ID', $staffId);  // Filter by logged-in staff's bookings
+            })
+            ->get();
         return view('staff.accRejCustom', compact('customizations'));
     }
 
     public function acceptCustomization($customizationId)
     {
+        $staffId = Auth::guard('staff')->user()->staff_ID;
         $customization = PackageDetail::findOrFail($customizationId);
+        // Ensure the customization belongs to the logged-in staff
+        $booking = Booking::where('package_detail_ID', $customizationId)
+            ->where('staff_ID', $staffId)
+            ->firstOrFail();
+
         $customization->status = 'Accepted';
         $customization->save();
-    
-        // Update the booking custom status
-        $booking = Booking::where('package_detail_ID', $customizationId)->first();
-        if ($booking) {
-            $booking->custom_Status = 'Accepted';
-            $booking->save();
-        }
-    
+
+        $booking->custom_Status = 'Accepted';
+        $booking->save();
+
         return redirect()->route('customizations')->with('success', 'Customization accepted successfully.');
     }
     
     public function rejectCustomization($customizationId)
     {
+        $staffId = Auth::guard('staff')->user()->staff_ID;
         $customization = PackageDetail::findOrFail($customizationId);
+        // Ensure the customization belongs to the logged-in staff
+        $booking = Booking::where('package_detail_ID', $customizationId)
+            ->where('staff_ID', $staffId)
+            ->firstOrFail();
+
         $customization->status = 'Rejected';
         $customization->save();
-    
-        // Update the booking custom status
-        $booking = Booking::where('package_detail_ID', $customizationId)->first();
-        if ($booking) {
-            $booking->custom_Status = 'Rejected';
-            $booking->save();
-        }
-    
+
+        $booking->custom_Status = 'Rejected';
+        $booking->save();
+
         return redirect()->route('customizations')->with('success', 'Customization rejected successfully.');
     }
 

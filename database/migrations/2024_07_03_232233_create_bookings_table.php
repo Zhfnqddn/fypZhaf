@@ -21,10 +21,13 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('cust_ID');
             $table->unsignedBigInteger('package_ID');
             $table->unsignedBigInteger('package_detail_ID')->nullable();
+            $table->unsignedBigInteger('staff_ID'); // Add this line
             $table->timestamps();
+
             $table->foreign('cust_ID')->references('cust_ID')->on('customers');
             $table->foreign('package_ID')->references('package_ID')->on('packages');
             $table->foreign('package_detail_ID')->references('package_detail_ID')->on('package_details');
+            $table->foreign('staff_ID')->references('staff_ID')->on('staff'); // Add this line
         });
     }
 

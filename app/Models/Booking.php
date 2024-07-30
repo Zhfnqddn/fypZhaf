@@ -18,6 +18,7 @@ class Booking extends Model
         'cust_ID',
         'package_ID',
         'package_detail_ID',
+        'staff_ID',  // Add this line
     ];
 
     public function customer()
@@ -39,5 +40,11 @@ class Booking extends Model
     public function packageDetails()
     {
         return $this->hasMany(PackageDetail::class, 'booking_id', 'booking_ID');
+    }
+
+    // Add a relationship to the Staff model if you have one
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_ID');
     }
 }
