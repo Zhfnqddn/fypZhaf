@@ -69,7 +69,7 @@ class PortfolioController extends Controller
     {
         Log::info('StoreVideo called with request: ', $request->all());
     
-        $maxSize = env('UPLOAD_MAX_SIZE', 51200); // 50MB in KB
+        $maxSize = env('UPLOAD_MAX_SIZE', 102400); // 50MB in KB
     
         $request->validate([
             'video' => 'required|mimetypes:video/mp4,video/avi,video/mpeg|max:' . $maxSize,
