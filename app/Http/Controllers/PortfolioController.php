@@ -66,11 +66,11 @@ class PortfolioController extends Controller
     }
 
     public function storeVideo(Request $request)
-{
+    {
     Log::info('StoreVideo called with request: ', $request->all());
 
     $request->validate([
-        'video' => 'required|mimetypes:video/mp4,video/avi,video/mpeg',
+        'video' => 'required|mimetypes:video/mp4,video/avi,video/mpeg|max:51200',
     ]);
 
     $staffId = Auth::id();
