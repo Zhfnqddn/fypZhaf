@@ -69,7 +69,7 @@ class PortfolioController extends Controller
     {
         Log::info('StoreVideo called with request: ', $request->all());
     
-        $maxSize = env('UPLOAD_MAX_SIZE', 51200); // Get max size from env
+        $maxSize = env('UPLOAD_MAX_SIZE', 51200); // 50MB in KB
     
         $request->validate([
             'video' => 'required|mimetypes:video/mp4,video/avi,video/mpeg|max:' . $maxSize,
@@ -112,6 +112,7 @@ class PortfolioController extends Controller
             return redirect()->route('staff.videos.index')->with('error', 'Failed to upload video due to a server error.');
         }
     }
+    
     
 
     public function destroyVideo(Video $video)
