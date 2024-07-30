@@ -15,12 +15,14 @@ class StatusController extends Controller
 {
     public function showBookings()
     {
+        $staff = Auth::user();
         $bookings = Booking::with('customer')->get();  
         return view('staff.accRej', compact('bookings'));
     }
 
     public function acceptBooking($bookingId)
     {
+        $staff = Auth::user();
         $booking = Booking::findOrFail($bookingId);
         $booking->booking_Status = 'Accepted';
         $booking->save();
@@ -30,6 +32,7 @@ class StatusController extends Controller
 
     public function rejectBooking($bookingId)
     {
+        $staff = Auth::user();
         $booking = Booking::findOrFail($bookingId);
         $booking->booking_Status = 'Rejected';
         $booking->save();
@@ -63,12 +66,14 @@ class StatusController extends Controller
 
     public function showCustomizations()
     {
+        $staff = Auth::user();
         $customizations = PackageDetail::with('customer', 'package')->get();
         return view('staff.accRejCustom', compact('customizations'));
     }
 
     public function acceptCustomization($customizationId)
     {
+        $staff = Auth::user();
         $customization = PackageDetail::findOrFail($customizationId);
         $customization->status = 'Accepted';
         $customization->save();
@@ -85,6 +90,7 @@ class StatusController extends Controller
     
     public function rejectCustomization($customizationId)
     {
+        $staff = Auth::user();
         $customization = PackageDetail::findOrFail($customizationId);
         $customization->status = 'Rejected';
         $customization->save();
