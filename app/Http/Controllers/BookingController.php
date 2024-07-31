@@ -134,7 +134,7 @@ class BookingController extends Controller
                      case 'Studio':
                          $totalPrice += 200;
                          break;
-                     case 'Customer Venue':
+                     case 'CustomerVenue':
                          $totalPrice += 250;
                          break;
                  }
