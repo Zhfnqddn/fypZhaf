@@ -7,6 +7,6 @@ class UpdCustController extends Controller
 {
 public function updCust()
 {
-return view('cust\updCust');
+return view('cust.updCust');
 }
 }
