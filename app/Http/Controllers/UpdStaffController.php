@@ -7,6 +7,6 @@ class UpdStaffController extends Controller
 {
 public function updStaff()
 {
-return view('staff\updStaff');
+return view('staff.updStaff');
 }
 }
