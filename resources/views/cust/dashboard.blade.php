@@ -63,7 +63,7 @@
 	<!--HOME-->
 	<section class="home" id="home">
 		<div class="home-text">
-			<h1>“WHEN I HAVE A <span>CAMERA</span> IN MY HAND, I KNOW<br> <span>NO FEAR</span>"</h1>
+			<h1>“WHEN I HAVE A <span>CAMERA an</span> IN MY HAND, I KNOW<br> <span>NO FEAR</span>"</h1>
 			<a href="{{ (route('filter')) }}" class="btn">BOOK NOW</a>
 		</div>
 		<div class="home-img">
